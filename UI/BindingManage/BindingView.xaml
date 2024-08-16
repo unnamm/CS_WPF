@@ -21,5 +21,7 @@
         <!--button click binding + parameter-->
         <Button Content="show1" Command="{Binding ButtonClickParamCommand}" CommandParameter="1" Padding="10"/>
         <Button Content="show2" Command="{Binding ButtonClickParamCommand}" CommandParameter="2" Padding="10"/>
+
+        <ListBox ItemsSource="{Binding StringCollection}" Height="100"/>
     </StackPanel>
 </UserControl>

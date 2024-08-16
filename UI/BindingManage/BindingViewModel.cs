@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace UI.BindingManage
@@ -12,6 +13,8 @@ namespace UI.BindingManage
     {
         [ObservableProperty] DateTime _timeText; //TimeText binding view
         [ObservableProperty] double _value;
+
+        public ObservableCollection<string> StringCollection { get; } = []; //need public, need get property
 
         internal BindingViewModel()
         {
@@ -30,20 +33,22 @@ namespace UI.BindingManage
                 await Task.Delay(1000);
                 TimeText = DateTime.Now;
                 Value = new Random().NextDouble();
+                StringCollection.Add(TimeText.ToString("yyyy-MM-dd HH:mm:ss.f"));
             }
         }
 
         /// <summary>
-        /// binding command
+        /// binding button command
+        /// need public
         /// </summary>
         [RelayCommand]
-        public void ButtonClick()
+        public static void ButtonClick()
         {
             MessageBox.Show("", "click");
         }
 
         [RelayCommand]
-        public void ButtonClickParam(string param)
+        public static void ButtonClickParam(string param)
         {
             MessageBox.Show(param, "click");
         }

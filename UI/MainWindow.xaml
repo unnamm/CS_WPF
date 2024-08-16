@@ -8,7 +8,7 @@
         xmlns:dataGridManage="clr-namespace:UI.DataGridManage"
         xmlns:bindingManage="clr-namespace:UI.BindingManage"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="MainWindow" Height="900" Width="1600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,13 +19,16 @@
 
         <TabControl Grid.Row="1">
 
-            <!--view add in user control view-->
             <TabItem Header="Add view">
                 <addView:AddView/>
             </TabItem>
 
-            <TabItem Header="Add view">
+            <TabItem Header="binding">
                 <bindingManage:BindingView/>
+            </TabItem>
+
+            <TabItem Header="data grid">
+                <dataGridManage:DataGridManageView/>
             </TabItem>
 
         </TabControl>
