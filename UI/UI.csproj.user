@@ -7,6 +7,26 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AddViewUserControl\AddView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="BindingManage\BindingView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="DataGridManage\DataGridView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AddViewUserControl\AddView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="BindingManage\BindingView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DataGridManage\DataGridView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
