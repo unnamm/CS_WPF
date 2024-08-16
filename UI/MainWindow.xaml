@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:UI"
         xmlns:addView="clr-namespace:UI.AddViewUserControl"
         xmlns:dataGridManage="clr-namespace:UI.DataGridManage"
+        xmlns:bindingManage="clr-namespace:UI.BindingManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
     <Grid>
@@ -18,12 +19,13 @@
 
         <TabControl Grid.Row="1">
 
-            <TabItem Header="Add view"> <!--view add in user control view-->
+            <!--view add in user control view-->
+            <TabItem Header="Add view">
                 <addView:AddView/>
             </TabItem>
 
-            <TabItem Header="DataGrid">
-                <dataGridManage:DataGridView/>
+            <TabItem Header="Add view">
+                <bindingManage:BindingView/>
             </TabItem>
 
         </TabControl>
