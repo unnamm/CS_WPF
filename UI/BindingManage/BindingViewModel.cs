@@ -1,15 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows;
 
 namespace UI.BindingManage
 {
+    /// <summary>
+    /// need partial
+    /// need ObservableObject
+    /// </summary>
     internal partial class BindingViewModel : ObservableObject
     {
-        [ObservableProperty] DateTime _timeText;
+        [ObservableProperty] DateTime _timeText; //TimeText binding view
+        [ObservableProperty] double _value;
 
         internal BindingViewModel()
         {
@@ -18,13 +20,32 @@ namespace UI.BindingManage
             startTick();
         }
 
+        /// <summary>
+        /// set member var
+        /// </summary>
         private async void startTick()
         {
             while (true)
             {
-                await Task.Delay(500);
+                await Task.Delay(1000);
                 TimeText = DateTime.Now;
+                Value = new Random().NextDouble();
             }
+        }
+
+        /// <summary>
+        /// binding command
+        /// </summary>
+        [RelayCommand]
+        public void ButtonClick()
+        {
+            MessageBox.Show("", "click");
+        }
+
+        [RelayCommand]
+        public void ButtonClickParam(string param)
+        {
+            MessageBox.Show(param, "click");
         }
     }
 }

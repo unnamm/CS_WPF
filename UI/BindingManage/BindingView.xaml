@@ -6,7 +6,20 @@
              xmlns:local="clr-namespace:UI.BindingManage"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="{Binding TimeText}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <!--text binding-->
+        <TextBlock Text="{Binding TimeText}" FontSize="20"/>
+        <TextBlock Text="{Binding Value}" FontSize="20"/>
+
+        <!--string format-->
+        <TextBlock Text="{Binding Value, StringFormat={}{0:F2}}" FontSize="20"/>
+        <TextBlock Text="{Binding Value, StringFormat={}front{0:f1}back}" FontSize="20"/>
+
+        <!--button click binding-->
+        <Button Content="show" Command="{Binding ButtonClickCommand}" Padding="10"/>
+
+        <!--button click binding + parameter-->
+        <Button Content="show1" Command="{Binding ButtonClickParamCommand}" CommandParameter="1" Padding="10"/>
+        <Button Content="show2" Command="{Binding ButtonClickParamCommand}" CommandParameter="2" Padding="10"/>
+    </StackPanel>
 </UserControl>
