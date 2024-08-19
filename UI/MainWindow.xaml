@@ -10,19 +10,19 @@
         xmlns:convertManage="clr-namespace:UI.ConvertManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
+    <!--xmlns:xxxxxxx is add namespace for add view-->
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <!--title-->
         <TextBlock Grid.Row="0" Text="Title" FontSize="30" Margin="10" HorizontalAlignment="Center"/>
 
+        <!--content body-->
         <TabControl Grid.Row="1">
-
-            <TabItem Header="Add view">
-                <addView:AddView/>
-            </TabItem>
 
             <TabItem Header="binding">
                 <bindingManage:BindingView/>
