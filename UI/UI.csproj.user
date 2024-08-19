@@ -19,6 +19,9 @@
     <Compile Update="DataGridManage\DataGridView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="DefinitionManage\DefinitionView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="BindingManage\BindingView.xaml">
@@ -31,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="DataGridManage\DataGridView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DefinitionManage\DefinitionView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

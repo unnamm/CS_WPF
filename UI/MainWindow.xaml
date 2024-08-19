@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
-        xmlns:addView="clr-namespace:UI.AddViewUserControl"
         xmlns:dataGridManage="clr-namespace:UI.DataGridManage"
         xmlns:bindingManage="clr-namespace:UI.BindingManage"
         xmlns:convertManage="clr-namespace:UI.ConvertManage"
+        xmlns:definitionManage="clr-namespace:UI.DefinitionManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
     <!--xmlns:xxxxxxx is add namespace for add view-->
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -34,6 +34,10 @@
 
             <TabItem Header="converter">
                 <convertManage:ConvertView/>
+            </TabItem>
+
+            <TabItem Header="definition">
+                <definitionManage:DefinitionView/>
             </TabItem>
 
         </TabControl>
