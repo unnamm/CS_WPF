@@ -10,9 +10,78 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <local:DataGridView Grid.Column="0" ItemsSourceMy="{Binding Collection1}"/>
-        <local:DataGridView Grid.Column="1" ItemsSourceMy="{Binding Collection2}"/>
+        <!--custom header datagrid-->
+        <DataGrid Grid.Column="0" ItemsSource="{Binding Collection1}"
+                  AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="0">
+
+            <!--DataGridComboBoxColumn need resources-->
+            <DataGrid.Resources>
+                <CollectionViewSource x:Key="data" Source="{Binding ComboData}"/>
+            </DataGrid.Resources>
+
+            <!--change row color for check-->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Check}" Value="true">
+                            <Setter Property="Background" Value="OrangeRed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Check}" Value="false">
+                            <Setter Property="Background" Value="White"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.Columns>
+                
+                <!--text, checkbox, combobox are clicked many-->
+                <DataGridTextColumn Header="name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="number" Binding="{Binding Data}"/>
+
+                <!--UpdateSourceTrigger=PropertyChanged immediately change Collection1 in datagrid column0-->
+                <DataGridCheckBoxColumn Header="check" Binding="{Binding Check, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <!--SelectedItemBinding need select-->
+                <DataGridComboBoxColumn Header="combo" ItemsSource="{Binding Source={StaticResource data}}" SelectedItemBinding="{Binding ComboSelect}"/>
+
+                <!--Template is one click-->
+                <DataGridTemplateColumn Header="one click">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Width="100"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="one click">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="one click">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            
+                            <!--all row same selected-->
+                            <!--<ComboBox ItemsSource="{Binding Source={StaticResource data}}"/>-->
+
+                            <ComboBox ItemsSource="{Binding DataContext.ComboData, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--reuse datagridview-->
+        <local:DataGridView Grid.Column="1" ItemsSourceMy="{Binding Collection1}"/>
+        <local:DataGridView Grid.Column="2" ItemsSourceMy="{Binding Collection2}"/>
+
     </Grid>
 </UserControl>

@@ -10,6 +10,7 @@
     <!--get parent itemsource-->
     <DataGrid ItemsSource="{Binding ItemsSourceMy, RelativeSource={RelativeSource AncestorType=UserControl}}"
               SelectedItem="{Binding Selected}"
-              CanUserAddRows="False" RowHeaderWidth="0"/>
+              CanUserAddRows="False" RowHeaderWidth="0">
+    </DataGrid>
 
 </UserControl>
