@@ -8,6 +8,7 @@
         xmlns:bindingManage="clr-namespace:UI.BindingManage"
         xmlns:convertManage="clr-namespace:UI.ConvertManage"
         xmlns:definitionManage="clr-namespace:UI.DefinitionManage"
+        xmlns:designManage="clr-namespace:UI.DesignManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
     <!--xmlns:xxxxxxx is add namespace for add view-->
@@ -38,6 +39,10 @@
 
             <TabItem Header="definition">
                 <definitionManage:DefinitionView/>
+            </TabItem>
+
+            <TabItem Header="design">
+                <designManage:DesignView/>
             </TabItem>
 
         </TabControl>
