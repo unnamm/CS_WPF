@@ -31,6 +31,7 @@ namespace UI.DataGridManage
             ComboData.Add("combo3");
 
             timeTick();
+            
         }
 
         /// <summary>

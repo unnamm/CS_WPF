@@ -10,6 +10,9 @@
     <Compile Update="BindingManage\BindingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CollectionManage\CollectView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ConvertManage\ConvertView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="BindingManage\BindingView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CollectionManage\CollectView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ConvertManage\ConvertView.xaml">
