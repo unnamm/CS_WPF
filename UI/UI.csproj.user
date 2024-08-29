@@ -13,6 +13,9 @@
     <Compile Update="CollectionManage\CollectView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ComboboxManage\ComboboxView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ConvertManage\ConvertView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,12 +31,18 @@
     <Compile Update="DesignManage\DesignView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="StyleManage\StyleView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="BindingManage\BindingView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CollectionManage\CollectView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ComboboxManage\ComboboxView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ConvertManage\ConvertView.xaml">
@@ -52,6 +61,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="StyleManage\StyleView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

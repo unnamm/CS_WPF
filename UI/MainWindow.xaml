@@ -10,6 +10,8 @@
         xmlns:definitionManage="clr-namespace:UI.DefinitionManage"
         xmlns:designManage="clr-namespace:UI.DesignManage"
         xmlns:collectionManage="clr-namespace:UI.CollectionManage"
+        xmlns:comboboxManage="clr-namespace:UI.ComboboxManage"
+        xmlns:styleManage="clr-namespace:UI.StyleManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
     <!--xmlns:xxxxxxx is add namespace for add view-->
@@ -48,6 +50,14 @@
 
             <TabItem Header="collection view">
                 <collectionManage:CollectView/>
+            </TabItem>
+
+            <TabItem Header="comboBox">
+                <comboboxManage:ComboboxView/>
+            </TabItem>
+
+            <TabItem Header="Style">
+                <styleManage:StyleView/>
             </TabItem>
 
         </TabControl>

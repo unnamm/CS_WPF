@@ -6,14 +6,19 @@
              xmlns:local="clr-namespace:UI.ConvertManage"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <!--add converter-->
     <UserControl.Resources>
         <local:BoolToColorConvert x:Key="BoolToColorConvert"/>
     </UserControl.Resources>
-    
+
     <Grid>
-        <!--Binding bool convert color-->
-        <Rectangle Width="100" Height="100" Fill="{Binding Value, Converter={StaticResource BoolToColorConvert}}"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Value, StringFormat={}{0} -> color}"/>
+
+            <!--Binding bool convert color-->
+            <Rectangle Width="100" Height="100" Fill="{Binding Value, Converter={StaticResource BoolToColorConvert}}"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>
