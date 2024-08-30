@@ -12,7 +12,7 @@ namespace UI.CollectionManage
         public ICollectionView Sources3 { get; set; } //devide to filter
 
         private int _index = 0;
-        private ObservableCollection<string> _list = []; //binding need ObservableCollection
+        private ObservableCollection<string> _list = []; //add remove binding need ObservableCollection
 
         public CollectViewModel()
         {
@@ -22,12 +22,19 @@ namespace UI.CollectionManage
                 _index++;
             }
 
-            Sources1 = CollectionViewSource.GetDefaultView(_list); //same IEnumerable is same collectionview, make new object
-
-            Sources2 = CollectionViewSource.GetDefaultView(_list.ToArray());
+            //one collection, each iview has different filter
+            Sources1 = new CollectionViewSource { Source = _list }.View;
+            Sources2 = new CollectionViewSource { Source = _list }.View;
             Sources2.Filter = x => ((string)x).Contains('1') == true;
-            Sources3 = CollectionViewSource.GetDefaultView(_list.ToArray());
+            Sources3 = new CollectionViewSource { Source = _list }.View;
             Sources3.Filter = x => ((string)x).Contains('2') == true;
+
+            //one collection, each iview has same filter
+            //Sources1 = CollectionViewSource.GetDefaultView(_list);
+            //Sources2 = CollectionViewSource.GetDefaultView(_list);
+            //Sources2.Filter = x => ((string)x).Contains('1') == true;
+            //Sources3 = CollectionViewSource.GetDefaultView(_list);
+            //Sources3.Filter = x => ((string)x).Contains('2') == true;
 
             startTick();
         }
