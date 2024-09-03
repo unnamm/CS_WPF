@@ -4,7 +4,10 @@ namespace UI.ConvertManage
 {
     internal partial class ConvertViewModel : ObservableObject
     {
-        [ObservableProperty] private bool _value = false;
+        [ObservableProperty] private bool _isValue = false;
+        [ObservableProperty] private int _value = 0;
+        [ObservableProperty] private string _str = string.Empty;
+
 
         public ConvertViewModel()
         {
@@ -13,10 +16,12 @@ namespace UI.ConvertManage
 
         private async void startTick()
         {
-            while(true)
+            while (true)
             {
                 await Task.Delay(1000);
-                Value = !Value;
+                IsValue = !IsValue;
+                Value++;
+                Str = Str == "m/s" ? "kg" : "m/s";
             }
         }
     }

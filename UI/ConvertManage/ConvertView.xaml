@@ -10,15 +10,24 @@
     <!--add converter-->
     <UserControl.Resources>
         <local:BoolToColorConvert x:Key="BoolToColorConvert"/>
+        <local:MultiConverter x:Key="MultiConverter"/>
     </UserControl.Resources>
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="{Binding Value, StringFormat={}{0} -> color}"/>
+            <TextBlock Text="{Binding IsValue, StringFormat={}{0} -> color}"/>
 
             <!--Binding bool convert color-->
-            <Rectangle Width="100" Height="100" Fill="{Binding Value, Converter={StaticResource BoolToColorConvert}}"/>
-        </StackPanel>
+            <Rectangle Width="100" Height="100" Fill="{Binding IsValue, Converter={StaticResource BoolToColorConvert}}"/>
 
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                        <Binding Path="Value"/>
+                        <Binding Path="Str"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>

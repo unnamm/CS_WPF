@@ -14,6 +14,8 @@ namespace UI.BindingManage
         [ObservableProperty] DateTime _timeText; //TimeText binding view
         [ObservableProperty] double _value;
 
+        public TempCollection Temp { get; } = new();
+
         public ObservableCollection<string> StringCollection { get; } = []; //need public, need get property
 
         internal BindingViewModel()
@@ -21,6 +23,8 @@ namespace UI.BindingManage
             TimeText = DateTime.Now;
 
             startTick();
+
+            Temp.Col = new ObservableCollection<string>(["a", "b"]); //only use in Constructor
         }
 
         /// <summary>
@@ -34,6 +38,8 @@ namespace UI.BindingManage
                 TimeText = DateTime.Now;
                 Value = new Random().NextDouble();
                 StringCollection.Add(TimeText.ToString("yyyy-MM-dd HH:mm:ss.f"));
+                //Temp.Col = new ObservableCollection<string>(["a", "b"]); //imposible
+                Temp.Col.Add(TimeText.ToString());
             }
         }
 
@@ -47,9 +53,15 @@ namespace UI.BindingManage
             MessageBox.Show("", "click");
         }
 
+        /// <summary>
+        /// auto button enable
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         [RelayCommand]
-        public static void ButtonClickParam(string param)
+        public static async Task ButtonClickParam(string param)
         {
+            await Task.Delay(1000);
             MessageBox.Show(param, "click");
         }
     }

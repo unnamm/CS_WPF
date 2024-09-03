@@ -24,5 +24,6 @@
 
         <!--list binding-->
         <ListBox ItemsSource="{Binding StringCollection}" Height="100"/>
+        <ListView ItemsSource="{Binding Temp.Col}" Height="100"/>
     </StackPanel>
 </UserControl>
