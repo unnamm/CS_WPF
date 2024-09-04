@@ -8,9 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <!--get parent itemsource-->
+    <!--VirtualizingPanel.IsVirtualizing= is auto reuse row, if false: draw all rows, very slow, block combobox reset-->
     <DataGrid ItemsSource="{Binding ItemsSourceMy, RelativeSource={RelativeSource AncestorType=UserControl}}"
               SelectedItem="{Binding Selected}"
-              CanUserAddRows="False" RowHeaderWidth="0">
+              CanUserAddRows="False" RowHeaderWidth="0"
+              VirtualizingPanel.IsVirtualizing="True">
     </DataGrid>
 
 </UserControl>
