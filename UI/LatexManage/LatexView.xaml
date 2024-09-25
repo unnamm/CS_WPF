@@ -1,0 +1,33 @@
+﻿<!--WpfMath-License-Identifier: MIT-->
+
+<UserControl x:Class="UI.LatexManage.LatexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UI.LatexManage"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="30">
+            <controls:FormulaControl Formula="{Binding Formula}" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="{Binding Scale}"/>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="Scale:" FontSize="30" Margin="10,0"/>
+            <Slider Margin="150,0" Minimum="1" Maximum="100" Value="{Binding Scale}" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Scale, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Margin="100,0" HorizontalAlignment="Left"/>
+        </Grid>
+
+        <TextBox Grid.Row="2" Text="{Binding Formula, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="30"/>
+        <Button Content="Export Png" Grid.Row="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding PrintCommand}" Padding="20" Margin="10"/>
+    </Grid>
+</UserControl>
