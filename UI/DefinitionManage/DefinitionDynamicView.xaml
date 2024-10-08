@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:UI.DefinitionManage"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+
+    <Grid Name="myGrid"
+          local:Helper.RowCount="{Binding RowNum}"
+          local:Helper.ColumnCount="{Binding ColumnNum}"
+          local:Helper.StarRows="{Binding RowStar}"
+          local:Helper.StarColumns="{Binding ColumnStar}"/>
+
 </UserControl>

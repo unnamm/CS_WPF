@@ -45,6 +45,10 @@
                 <definitionManage:DefinitionView/>
             </TabItem>
 
+            <TabItem Header="definition dynamic">
+                <definitionManage:DefinitionDynamicView/>
+            </TabItem>
+
             <TabItem Header="design">
                 <designManage:DesignView/>
             </TabItem>

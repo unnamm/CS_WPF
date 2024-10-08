@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace UI.DefinitionManage
 {
@@ -24,6 +25,26 @@ namespace UI.DefinitionManage
         {
             InitializeComponent();
             DataContext = new DefinitionDynamicViewModel();
+
+            Make(0, 0);
+            Make(1, 1);
+            Make(2, 2);
+            Make(1, 3);
+            Make(0, 4);
+        }
+
+        private void Make(int row, int column)
+        {
+            var cell = new TextBlock
+            {
+                Text = "test",
+                FontSize = 50,
+                Background = Brushes.Aqua,
+            };
+
+            Grid.SetColumn(cell, column);
+            Grid.SetRow(cell, row);
+            myGrid.Children.Add(cell);
         }
     }
 }

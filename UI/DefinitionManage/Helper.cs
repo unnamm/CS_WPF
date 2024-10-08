@@ -1,4 +1,23 @@
-﻿using System;
+﻿/*
+ GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+                            Preamble
+
+  The GNU General Public License is a free, copyleft license for
+software and other kinds of works. 
+
+
+# Blog
+Code for blog posts that are located on http://ireznykov.com and http://it-community.in.ua.
+Projects are named as topics in order to set correspondence.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

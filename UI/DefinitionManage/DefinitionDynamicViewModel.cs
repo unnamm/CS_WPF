@@ -17,6 +17,19 @@ namespace UI.DefinitionManage
 
         public DefinitionDynamicViewModel()
         {
+            SetCellNum(3, 7);
+        }
+
+        private void SetCellNum(int row, int column)
+        {
+            RowNum = row;
+            ColumnNum = column;
+
+            //"0,1,...,row"
+            //default is "auto"
+            //all definition "*"
+            RowStar = string.Join(',', Enumerable.Range(0, row));
+            ColumnStar = string.Join(',', Enumerable.Range(0, column));
         }
     }
 }
