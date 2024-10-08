@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.LatexManage
+namespace UI.DefinitionManage
 {
     /// <summary>
-    /// LatexView.xaml
+    /// DefinitionDynamicView.xaml
     /// </summary>
-    public partial class LatexView : UserControl
+    public partial class DefinitionDynamicView : UserControl
     {
-        public LatexView()
+        public DefinitionDynamicView()
         {
             InitializeComponent();
-            DataContext = new LatexViewModel();
+            DataContext = new DefinitionDynamicViewModel();
         }
     }
 }

@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace UI.DefinitionManage
 {
     /// <summary>
-    /// DefinitionView.xaml에 대한 상호 작용 논리
+    /// DefinitionView.xaml
     /// </summary>
     public partial class DefinitionView : UserControl
     {
