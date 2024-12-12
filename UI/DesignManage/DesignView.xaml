@@ -11,7 +11,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <!--add xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"-->
 
-    <!--want apply all views, resources move app.xaml-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

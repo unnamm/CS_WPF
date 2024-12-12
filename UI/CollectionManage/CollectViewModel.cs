@@ -12,7 +12,7 @@ namespace UI.CollectionManage
         public ICollectionView Sources3 { get; set; } //devide to filter
 
         private int _index = 0;
-        private ObservableCollection<string> _list = []; //add remove binding need ObservableCollection
+        private readonly ObservableCollection<string> _list = []; //add remove binding need ObservableCollection
 
         public CollectViewModel()
         {
