@@ -13,6 +13,7 @@
         xmlns:comboboxManage="clr-namespace:UI.ComboboxManage"
         xmlns:styleManage="clr-namespace:UI.StyleManage"
         xmlns:latexManage="clr-namespace:UI.LatexManage"
+        xmlns:messageManage="clr-namespace:UI.MessageManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
     <!--xmlns:xxxxxxx is add namespace for add view-->
@@ -67,6 +68,10 @@
 
             <TabItem Header="LaTeX">
                 <latexManage:LatexView/>
+            </TabItem>
+
+            <TabItem Header="Message">
+                <messageManage:MessageView />
             </TabItem>
 
         </TabControl>

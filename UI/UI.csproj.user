@@ -32,6 +32,9 @@
     <Compile Update="LatexManage\LatexView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MessageManage\MessageView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="StyleManage\StyleView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -68,6 +71,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MessageManage\MessageView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="StyleManage\StyleView.xaml">

@@ -1,5 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,27 +13,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UI.MessageManage;
 
-namespace UI
+namespace UI.MessageManage
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// MessageView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MessageView : UserControl
     {
-        public MainWindow()
+        public MessageView()
         {
             InitializeComponent();
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.Key == Key.Q)
-            {
-                WeakReferenceMessenger.Default.Send(new SendMessage("key input"));
-            }
+            DataContext = new MessageViewModel();
         }
     }
 }
