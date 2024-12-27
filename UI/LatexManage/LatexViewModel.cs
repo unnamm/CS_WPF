@@ -37,8 +37,10 @@ namespace UI.LatexManage
                 return;
             }
 
-            FileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Image|*.png";
+            var dialog = new SaveFileDialog
+            {
+                Filter = "Image|*.png"
+            };
 
             if (dialog.ShowDialog() == false)
             {

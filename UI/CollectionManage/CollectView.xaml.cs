@@ -23,7 +23,6 @@ namespace UI.CollectionManage
         public CollectView()
         {
             InitializeComponent();
-            DataContext = new CollectViewModel();
         }
     }
 }

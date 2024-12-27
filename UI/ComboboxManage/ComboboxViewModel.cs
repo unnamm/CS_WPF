@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace UI.ComboboxManage
 {
@@ -21,9 +22,10 @@ namespace UI.ComboboxManage
         }
 
         [RelayCommand]
-        public void Change(string data)
+        public static void Change(string data)
         {
             //select combobox
+            MessageBox.Show(data, "select");
         }
     }
 }

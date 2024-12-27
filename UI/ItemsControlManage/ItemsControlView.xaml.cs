@@ -23,7 +23,6 @@ namespace UI.ItemsControlManage
         public ItemsControlView()
         {
             InitializeComponent();
-            DataContext = new ItemsControlViewModel();
         }
     }
 }

@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
         <TextBlock Text="{Binding Data}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding TestCol}"/>
+
     </Grid>
 </UserControl>

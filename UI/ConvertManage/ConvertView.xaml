@@ -20,14 +20,18 @@
             <!--Binding bool convert color-->
             <Rectangle Width="100" Height="100" Fill="{Binding IsValue, Converter={StaticResource BoolToColorConvert}}"/>
 
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding Converter="{StaticResource MultiConverter}">
-                        <Binding Path="Value"/>
-                        <Binding Path="Str"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="multi binding: "/>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource MultiConverter}">
+                            <Binding Path="Value"/>
+                            <Binding Path="Str"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+            
         </StackPanel>
     </Grid>
 </UserControl>

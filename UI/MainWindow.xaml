@@ -28,8 +28,24 @@
         <!--title-->
         <TextBlock Grid.Row="0" Text="Title" FontSize="30" Margin="10" HorizontalAlignment="Center"/>
 
+        <Grid Grid.Row="1">
+            <TabControl ItemsSource="{Binding TabItems}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Header}" FontSize="20"/>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <UserControl Content="{Binding Content}"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+
+            </TabControl>
+        </Grid>
+
         <!--content body-->
-        <TabControl Grid.Row="1">
+        <!--<TabControl Grid.Row="1">
 
             <TabItem Header="binding">
                 <bindingManage:BindingView/>
@@ -79,6 +95,6 @@
                 <itemsControlManage:ItemsControlView/>
             </TabItem>
 
-        </TabControl>
+        </TabControl>-->
     </Grid>
 </Window>

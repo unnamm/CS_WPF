@@ -24,7 +24,6 @@ namespace UI.DefinitionManage
         public DefinitionDynamicView()
         {
             InitializeComponent();
-            DataContext = new DefinitionDynamicViewModel();
 
             Make(0, 0);
             Make(1, 1);

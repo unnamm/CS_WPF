@@ -23,7 +23,6 @@ namespace UI.LatexManage
         public LatexView()
         {
             InitializeComponent();
-            DataContext = new LatexViewModel();
         }
     }
 }

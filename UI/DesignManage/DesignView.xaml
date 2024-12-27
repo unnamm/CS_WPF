@@ -25,7 +25,7 @@
     <!--no style is default material design-->
     <Grid>
         <StackPanel HorizontalAlignment="Center">
-            <TextBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="hint" Width="100" Text="content"/>
+            <TextBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="hint: hint1" Width="100" Text="content"/>
             <GroupBox Margin="5" Header="header">
                 <TextBlock Text="content"/>
             </GroupBox>

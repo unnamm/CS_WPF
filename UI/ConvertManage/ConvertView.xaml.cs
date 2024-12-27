@@ -23,7 +23,6 @@ namespace UI.ConvertManage
         public ConvertView()
         {
             InitializeComponent();
-            DataContext = new ConvertViewModel();
         }
     }
 }

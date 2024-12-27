@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,15 +22,6 @@ namespace UI
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.Key == Key.Q)
-            {
-                WeakReferenceMessenger.Default.Send(new SendMessage("key input"));
-            }
         }
     }
 }

@@ -23,7 +23,6 @@ namespace UI.DataGridManage
         public DataGridManageView()
         {
             InitializeComponent();
-            DataContext = new DataGridManageViewModel();
         }
     }
 }

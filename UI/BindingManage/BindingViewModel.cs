@@ -14,32 +14,30 @@ namespace UI.BindingManage
         [ObservableProperty] DateTime _timeText; //TimeText binding view
         [ObservableProperty] double _value;
 
-        public TempCollection Temp { get; } = new();
-
         public ObservableCollection<string> StringCollection { get; } = []; //need public, need get property
 
-        internal BindingViewModel()
+        public BindingViewModel()
         {
             TimeText = DateTime.Now;
 
-            startTick();
-
-            Temp.Col = new ObservableCollection<string>(["a", "b"]); //only use in Constructor
+            StartTick();
         }
 
         /// <summary>
         /// set member var
         /// </summary>
-        private async void startTick()
+        private async void StartTick()
         {
             while (true)
             {
                 await Task.Delay(1000);
                 TimeText = DateTime.Now;
                 Value = new Random().NextDouble();
-                StringCollection.Add(TimeText.ToString("yyyy-MM-dd HH:mm:ss.f"));
-                //Temp.Col = new ObservableCollection<string>(["a", "b"]); //imposible
-                Temp.Col.Add(TimeText.ToString());
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    StringCollection.Add(TimeText.ToString("yyyy-MM-dd HH:mm:ss.f"));
+                });
             }
         }
 
@@ -54,14 +52,23 @@ namespace UI.BindingManage
         }
 
         /// <summary>
-        /// auto button enable
+        /// async button command, auto enable button control
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         [RelayCommand]
-        public static async Task ButtonClickParam(string param)
+        public static async Task ButtonClickDelay()
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
+            MessageBox.Show("delay 500ms", "click");
+        }
+
+        /// <summary>
+        /// param button command
+        /// </summary>
+        /// <param name="param"></param>
+        [RelayCommand]
+        public static void ButtonClickParam(string param)
+        {
             MessageBox.Show(param, "click");
         }
     }

@@ -23,7 +23,6 @@ namespace UI.ComboboxManage
         public ComboboxView()
         {
             InitializeComponent();
-            DataContext = new ComboboxViewModel();
         }
     }
 }

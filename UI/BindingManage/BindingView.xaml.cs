@@ -26,7 +26,6 @@ namespace UI.BindingManage
         public BindingView()
         {
             InitializeComponent();
-            DataContext = new BindingViewModel();
         }
     }
 }

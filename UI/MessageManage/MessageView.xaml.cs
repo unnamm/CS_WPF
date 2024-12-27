@@ -24,7 +24,6 @@ namespace UI.MessageManage
         public MessageView()
         {
             InitializeComponent();
-            DataContext = new MessageViewModel();
         }
     }
 }
