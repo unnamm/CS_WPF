@@ -12,7 +12,6 @@ namespace UI.MessageManage
         public OtherThread()
         {
             Run();
-            //_ = Run2();
 
             Task.Run(async () =>
             {
@@ -32,17 +31,6 @@ namespace UI.MessageManage
             {
                 await Task.Delay(1000);
                 WeakReferenceMessenger.Default.Send(new SendMessage("Run"));
-            }
-        }
-
-        private static async Task Run2()
-        {
-            await Task.Delay(500);
-
-            while (true)
-            {
-                await Task.Delay(1000);
-                WeakReferenceMessenger.Default.Send(new SendMessage("Run2"));
             }
         }
     }

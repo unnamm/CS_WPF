@@ -14,6 +14,7 @@
         xmlns:styleManage="clr-namespace:UI.StyleManage"
         xmlns:latexManage="clr-namespace:UI.LatexManage"
         xmlns:messageManage="clr-namespace:UI.MessageManage"
+        xmlns:itemsControlManage="clr-namespace:UI.ItemsControlManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
     <!--xmlns:xxxxxxx is add namespace for add view-->
@@ -72,6 +73,10 @@
 
             <TabItem Header="Message">
                 <messageManage:MessageView />
+            </TabItem>
+
+            <TabItem Header="ItemsControl">
+                <itemsControlManage:ItemsControlView/>
             </TabItem>
 
         </TabControl>

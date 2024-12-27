@@ -13,7 +13,6 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
-
             <Grid.Resources>
                 <!--apply all textblock-->
                 <Style TargetType="TextBlock">
