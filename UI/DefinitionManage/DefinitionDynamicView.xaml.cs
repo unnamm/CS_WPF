@@ -12,13 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MaterialDesignThemes.Wpf.Theme;
 
 namespace UI.DefinitionManage
 {
-    /// <summary>
-    /// DefinitionDynamicView.xaml
-    /// </summary>
     public partial class DefinitionDynamicView : UserControl
     {
         public DefinitionDynamicView()
@@ -32,6 +28,11 @@ namespace UI.DefinitionManage
             Make(0, 4);
         }
 
+        /// <summary>
+        /// selected cell change property
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
         private void Make(int row, int column)
         {
             var cell = new TextBlock

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.CollectionManage
 {
-    /// <summary>
-    /// CollectView.xaml
-    /// </summary>
     public partial class CollectView : UserControl
     {
         public CollectView()

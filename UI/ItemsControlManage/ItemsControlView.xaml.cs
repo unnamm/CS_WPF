@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.ItemsControlManage
 {
-    /// <summary>
-    /// ItemsControlView.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class ItemsControlView : UserControl
     {
         public ItemsControlView()

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +19,11 @@ namespace UI.DefinitionManage
             SetCellNum(3, 7);
         }
 
+        /// <summary>
+        /// grid definition row * column
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
         private void SetCellNum(int row, int column)
         {
             RowNum = row;

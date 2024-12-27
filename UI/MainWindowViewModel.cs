@@ -11,6 +11,9 @@ namespace UI
 {
     class MainWindowViewModel : ObservableObject
     {
+        /// <summary>
+        /// TabControl ItemsSource
+        /// </summary>
         public ObservableCollection<TabItem> TabItems { get; } = [];
     }
 }

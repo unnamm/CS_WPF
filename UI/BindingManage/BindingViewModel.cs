@@ -5,16 +5,13 @@ using System.Windows;
 
 namespace UI.BindingManage
 {
-    /// <summary>
-    /// need partial
-    /// need ObservableObject
-    /// </summary>
     internal partial class BindingViewModel : ObservableObject
     {
-        [ObservableProperty] DateTime _timeText; //TimeText binding view
+        //need partial, Inherit ObservableObject
         [ObservableProperty] double _value;
+        [ObservableProperty] DateTime _timeText;
 
-        public ObservableCollection<string> StringCollection { get; } = []; //need public, need get property
+        public ObservableCollection<string> StringCol { get; } = []; //need public, get property
 
         public BindingViewModel()
         {
@@ -34,16 +31,16 @@ namespace UI.BindingManage
                 TimeText = DateTime.Now;
                 Value = new Random().NextDouble();
 
+                //ObservableCollection.add need dispatch
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    StringCollection.Add(TimeText.ToString("yyyy-MM-dd HH:mm:ss.f"));
+                    StringCol.Add(TimeText.ToString("yyyy-MM-dd HH:mm:ss.f"));
                 });
             }
         }
 
         /// <summary>
         /// binding button command
-        /// need public
         /// </summary>
         [RelayCommand]
         public static void ButtonClick()
@@ -52,7 +49,7 @@ namespace UI.BindingManage
         }
 
         /// <summary>
-        /// async button command, auto enable button control
+        /// async button command, auto enable control
         /// </summary>
         /// <returns></returns>
         [RelayCommand]

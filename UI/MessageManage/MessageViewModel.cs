@@ -13,14 +13,14 @@ namespace UI.MessageManage
     internal partial class MessageViewModel : ObservableObject, IRecipient<SendMessage>
     {
         [ObservableProperty] private string _data;
+
         public ObservableCollection<string> TestCol { get; } = [];
 
         public MessageViewModel()
         {
-            Data = "abcd";
-
             WeakReferenceMessenger.Default.Register(this);
 
+            Data = "abcd";
             _ = new OtherThread();
         }
 

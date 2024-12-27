@@ -15,14 +15,8 @@ using System.Windows.Shapes;
 
 namespace UI.BindingManage
 {
-    /// <summary>
-    /// binding view
-    /// </summary>
     public partial class BindingView : UserControl
     {
-        /// <summary>
-        /// need datacontext = viewmodel
-        /// </summary>
         public BindingView()
         {
             InitializeComponent();

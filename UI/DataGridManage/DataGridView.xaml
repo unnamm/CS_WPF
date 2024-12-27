@@ -14,5 +14,4 @@
               CanUserAddRows="False" RowHeaderWidth="0"
               VirtualizingPanel.IsVirtualizing="True">
     </DataGrid>
-
 </UserControl>

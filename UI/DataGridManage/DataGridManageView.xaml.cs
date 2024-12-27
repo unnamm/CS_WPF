@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.DataGridManage
 {
-    /// <summary>
-    /// have datagrids
-    /// </summary>
     public partial class DataGridManageView : UserControl
     {
         public DataGridManageView()

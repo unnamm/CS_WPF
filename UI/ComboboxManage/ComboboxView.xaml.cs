@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.ComboboxManage
 {
-    /// <summary>
-    /// ComboboxView.xaml
-    /// </summary>
     public partial class ComboboxView : UserControl
     {
         public ComboboxView()

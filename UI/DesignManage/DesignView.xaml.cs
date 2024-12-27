@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.DesignManage
 {
-    /// <summary>
-    /// DesignView.xaml
-    /// </summary>
     public partial class DesignView : UserControl
     {
         public DesignView()

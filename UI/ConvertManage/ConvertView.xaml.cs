@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.ConvertManage
 {
-    /// <summary>
-    /// ConvertView.xaml
-    /// </summary>
     public partial class ConvertView : UserControl
     {
         public ConvertView()

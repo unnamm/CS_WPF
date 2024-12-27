@@ -7,9 +7,19 @@ using System.Windows.Controls;
 
 namespace UI
 {
+    /// <summary>
+    /// main window tab item
+    /// </summary>
     class TabItem
     {
+        /// <summary>
+        /// view
+        /// </summary>
         public ContentControl? Content { get; set; }
-        public string Header { get; set; } = string.Empty;
+
+        /// <summary>
+        /// tab header
+        /// </summary>
+        public string? Header { get; set; }
     }
 }

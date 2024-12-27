@@ -1,11 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using UI.BindingManage;
@@ -25,16 +20,16 @@ namespace UI
     internal class App : Application
     {
         private readonly MainWindow _mainView;
-        private readonly IServiceCollection _services;
         private readonly List<Type> _viewList = [];
-        private readonly Dictionary<Type, Type> _viewContainer = [];
+        private readonly IServiceCollection _services;
+        private readonly Dictionary<Type, Type> _viewPair = [];
 
         public App()
         {
-            #region host build
             var builder = Host.CreateApplicationBuilder();
             _services = builder.Services;
 
+            #region host build
             AddViewAndViewModel<MainWindow, MainWindowViewModel>(); //main
 
             //add tab view and viewmodel
@@ -51,12 +46,10 @@ namespace UI
             //add tab view
             AddView<DesignView>();
             AddView<StyleView>();
-
-            var host = builder.Build();
             #endregion
 
+            var host = builder.Build();
             Ioc.Default.ConfigureServices(host.Services); //setting default
-
             _mainView = Ioc.Default.GetService<MainWindow>()!; //set mainview
 
             SettingView();
@@ -78,7 +71,7 @@ namespace UI
         {
             var vm = Ioc.Default.GetService<MainWindowViewModel>()!;
 
-            foreach (var pair in _viewContainer)
+            foreach (var pair in _viewPair)
             {
                 var uc = (ContentControl)Ioc.Default.GetService(pair.Key)!;
                 if (uc.DataContext != null)
@@ -110,9 +103,13 @@ namespace UI
             _services.AddSingleton<View>();
             _services.AddSingleton<ViewModel>();
 
-            _viewContainer.Add(typeof(View), typeof(ViewModel));
+            _viewPair.Add(typeof(View), typeof(ViewModel));
         }
 
+        /// <summary>
+        /// add only view
+        /// </summary>
+        /// <typeparam name="View"></typeparam>
         private void AddView<View>() where View : ContentControl
         {
             _services.AddSingleton<View>();

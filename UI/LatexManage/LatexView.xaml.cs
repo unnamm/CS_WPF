@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.LatexManage
 {
-    /// <summary>
-    /// LatexView.xaml
-    /// </summary>
     public partial class LatexView : UserControl
     {
         public LatexView()

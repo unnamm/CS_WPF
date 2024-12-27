@@ -5,8 +5,7 @@ using System.Windows.Controls;
 namespace UI.DataGridManage
 {
     /// <summary>
-    /// Interaction logic for DataGridView.xaml
-    /// reuse view
+    /// Interaction logic for DataGridView.xaml, content view
     /// </summary>
     public partial class DataGridView : UserControl
     {

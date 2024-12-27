@@ -22,6 +22,8 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="multi binding: "/>
+                
+                <!--multi converter-->
                 <TextBlock>
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource MultiConverter}">

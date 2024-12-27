@@ -8,11 +8,11 @@ namespace UI.CollectionManage
 {
     internal partial class CollectViewModel
     {
-        public ICollectionView Sources1 { get; set; } //show filter
-        public ICollectionView Sources2 { get; set; } //devide to filter
-        public ICollectionView Sources3 { get; set; } //devide to filter
+        public ICollectionView Sources1 { get; } //show filter
+        public ICollectionView Sources2 { get; } //devide to filter
+        public ICollectionView Sources3 { get; } //devide to filter
 
-        private readonly ObservableCollection<string> _list = []; //add remove binding need ObservableCollection
+        private readonly ObservableCollection<string> _list = [];
 
         public CollectViewModel()
         {
@@ -27,13 +27,6 @@ namespace UI.CollectionManage
             Sources2.Filter = x => ((string)x).Contains('1') == true;
             Sources3 = new CollectionViewSource { Source = _list }.View;
             Sources3.Filter = x => ((string)x).Contains('2') == true;
-
-            //one collection, each ICollectionView has same filter
-            //Sources1 = CollectionViewSource.GetDefaultView(_list);
-            //Sources2 = CollectionViewSource.GetDefaultView(_list);
-            //Sources2.Filter = x => ((string)x).Contains('1') == true;
-            //Sources3 = CollectionViewSource.GetDefaultView(_list);
-            //Sources3.Filter = x => ((string)x).Contains('2') == true;
 
             StartTick();
         }

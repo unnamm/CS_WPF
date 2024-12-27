@@ -4,21 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
-        xmlns:dataGridManage="clr-namespace:UI.DataGridManage"
-        xmlns:bindingManage="clr-namespace:UI.BindingManage"
-        xmlns:convertManage="clr-namespace:UI.ConvertManage"
-        xmlns:definitionManage="clr-namespace:UI.DefinitionManage"
-        xmlns:designManage="clr-namespace:UI.DesignManage"
-        xmlns:collectionManage="clr-namespace:UI.CollectionManage"
-        xmlns:comboboxManage="clr-namespace:UI.ComboboxManage"
-        xmlns:styleManage="clr-namespace:UI.StyleManage"
-        xmlns:latexManage="clr-namespace:UI.LatexManage"
-        xmlns:messageManage="clr-namespace:UI.MessageManage"
-        xmlns:itemsControlManage="clr-namespace:UI.ItemsControlManage"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
-    <!--xmlns:xxxxxxx is add namespace for add view-->
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -28,6 +15,7 @@
         <!--title-->
         <TextBlock Grid.Row="0" Text="Title" FontSize="30" Margin="10" HorizontalAlignment="Center"/>
 
+        <!--tab-->
         <Grid Grid.Row="1">
             <TabControl ItemsSource="{Binding TabItems}">
                 <TabControl.ItemTemplate>
@@ -40,61 +28,8 @@
                         <UserControl Content="{Binding Content}"/>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
-
             </TabControl>
         </Grid>
 
-        <!--content body-->
-        <!--<TabControl Grid.Row="1">
-
-            <TabItem Header="binding">
-                <bindingManage:BindingView/>
-            </TabItem>
-
-            <TabItem Header="data grid">
-                <dataGridManage:DataGridManageView/>
-            </TabItem>
-
-            <TabItem Header="converter">
-                <convertManage:ConvertView/>
-            </TabItem>
-
-            <TabItem Header="definition">
-                <definitionManage:DefinitionView/>
-            </TabItem>
-
-            <TabItem Header="definition dynamic">
-                <definitionManage:DefinitionDynamicView/>
-            </TabItem>
-
-            <TabItem Header="design">
-                <designManage:DesignView/>
-            </TabItem>
-
-            <TabItem Header="collection view">
-                <collectionManage:CollectView/>
-            </TabItem>
-
-            <TabItem Header="comboBox">
-                <comboboxManage:ComboboxView/>
-            </TabItem>
-
-            <TabItem Header="Style">
-                <styleManage:StyleView/>
-            </TabItem>
-
-            <TabItem Header="LaTeX">
-                <latexManage:LatexView/>
-            </TabItem>
-
-            <TabItem Header="Message">
-                <messageManage:MessageView />
-            </TabItem>
-
-            <TabItem Header="ItemsControl">
-                <itemsControlManage:ItemsControlView/>
-            </TabItem>
-
-        </TabControl>-->
     </Grid>
 </Window>

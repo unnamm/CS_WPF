@@ -8,7 +8,6 @@ namespace UI.ConvertManage
         [ObservableProperty] private int _value = 0;
         [ObservableProperty] private string _str = string.Empty;
 
-
         public ConvertViewModel()
         {
             startTick();
