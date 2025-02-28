@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.DependencyInjection;
+﻿using Common.Message;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sequence;
@@ -41,6 +43,7 @@ namespace Starter
             AutoCreateSingleTon();
             AutoConnectViewAndViewModel();
 
+            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
             Startup += (x, y) => _mainView.Show(); //mainwindow show
         }
 

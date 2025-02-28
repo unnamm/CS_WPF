@@ -30,7 +30,6 @@ namespace UI.View
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);
-            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
             WeakReferenceMessenger.Default.Send(new MainWindowRenderedMessage());
         }
 
