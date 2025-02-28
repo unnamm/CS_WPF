@@ -39,6 +39,9 @@ namespace UI.View
             EndProcess();
         }
 
+        /// <summary>
+        /// process before close mainwindow
+        /// </summary>
         private static async void EndProcess()
         {
             WeakReferenceMessenger.Default.Send(new BusyMessage(true, "exit..."));

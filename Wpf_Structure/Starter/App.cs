@@ -23,7 +23,7 @@ namespace Starter
         private readonly MainWindowView _mainView;
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceCollection _servicesCollection;
-        private readonly Dictionary<Type, Type> _viewPair = []; //view, viewmodel pair
+        private readonly Dictionary<Type, Type?> _viewPair = []; //view, viewmodel pair
 
         public App()
         {
@@ -32,6 +32,7 @@ namespace Starter
 
             #region add
             _servicesCollection.AddSingleton<Flow>();
+            AddView<DialogView>();
             AddViewAndViewModel<MainWindowView, MainWindowViewModel>();
             #endregion
 
@@ -85,7 +86,11 @@ namespace Starter
         {
             foreach (var pair in _viewPair)
             {
-                var uc = (ContentControl)Ioc.Default.GetService(pair.Key)!;
+                var uc = (ContentControl)_serviceProvider.GetService(pair.Key)!;
+
+                if (pair.Value == null)
+                    continue;
+
                 uc.DataContext = Ioc.Default.GetService(pair.Value) ?? throw new Exception("viewmodel null");
             }
         }
@@ -101,6 +106,12 @@ namespace Starter
             _servicesCollection.AddSingleton<ViewModel>();
 
             _viewPair.Add(typeof(View), typeof(ViewModel));
+        }
+
+        private void AddView<View>() where View : ContentControl
+        {
+            _servicesCollection.AddSingleton<View>();
+            _viewPair.Add(typeof(View), null);
         }
 
     }

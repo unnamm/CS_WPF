@@ -17,11 +17,21 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <materialDesign:DialogHost DialogTheme="Inherit" Identifier="RootDialog">
-            <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
 
-            </busyIndicator:BusyMask>
-        </materialDesign:DialogHost>
-    </Grid>
+    <materialDesign:DialogHost DialogTheme="Inherit" Identifier="RootDialog">
+        <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
+            <Grid>
+
+            </Grid>
+        </busyIndicator:BusyMask>
+    </materialDesign:DialogHost>
+
+    <!--<materialDesign:DialogHost CloseOnClickAway="True">
+        <materialDesign:DialogHost.DialogContent>
+            <local:DialogView/>
+        </materialDesign:DialogHost.DialogContent>
+
+        <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Show Dialog"
+               HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+    </materialDesign:DialogHost>-->
 </Window>
