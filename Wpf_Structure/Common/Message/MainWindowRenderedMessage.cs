@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Common.Message
 {
     /// <summary>
-    /// mainwindow show
+    /// run init after mainwindow show
     /// </summary>
     public record MainWindowRenderedMessage();
 }

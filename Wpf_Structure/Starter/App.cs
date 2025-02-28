@@ -17,11 +17,11 @@ namespace Starter
 {
     internal class App : Application
     {
+        private readonly List<Type> _singletonList = [];
         private readonly MainWindowView _mainView;
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceCollection _servicesCollection;
-        private readonly Dictionary<Type, Type?> _viewPair = []; //view, viewmodel pair
-        private readonly List<Type> _singletonList = [];
+        private readonly Dictionary<Type, Type?> _viewPair = [];
 
         public App()
         {
@@ -53,11 +53,7 @@ namespace Starter
             foreach (var pair in _viewPair)
             {
                 var uc = (ContentControl)_serviceProvider.GetService(pair.Key)!;
-
-                if (pair.Value == null)
-                    continue;
-
-                uc.DataContext = Ioc.Default.GetService(pair.Value) ?? throw new Exception("viewmodel null");
+                uc.DataContext = Ioc.Default.GetService(pair.Value!) ?? throw new Exception("viewmodel null");
             }
         }
 
@@ -79,10 +75,10 @@ namespace Starter
         /// <typeparam name="ViewModel"></typeparam>
         private void AddViewAndViewModel<View, ViewModel>() where View : ContentControl where ViewModel : class
         {
+            _viewPair.Add(typeof(View), typeof(ViewModel));
+
             _servicesCollection.AddSingleton<View>();
             _servicesCollection.AddSingleton<ViewModel>();
-
-            _viewPair.Add(typeof(View), typeof(ViewModel));
         }
 
         /// <summary>
@@ -91,8 +87,8 @@ namespace Starter
         /// <typeparam name="T"></typeparam>
         private void AddSingleTon<T>() where T : class
         {
-            _servicesCollection.AddSingleton<T>();
             _singletonList.Add(typeof(T));
+            _servicesCollection.AddSingleton<T>();
         }
 
     }

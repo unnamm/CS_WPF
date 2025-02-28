@@ -21,17 +21,15 @@
     <materialDesign:DialogHost DialogTheme="Inherit" Identifier="RootDialog">
         <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <local:TitleView Grid.Row="0"/>
+                <local:ContentView Grid.Row="1"/>
 
             </Grid>
         </busyIndicator:BusyMask>
     </materialDesign:DialogHost>
-
-    <!--<materialDesign:DialogHost CloseOnClickAway="True">
-        <materialDesign:DialogHost.DialogContent>
-            <local:DialogView/>
-        </materialDesign:DialogHost.DialogContent>
-
-        <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Show Dialog"
-               HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
-    </materialDesign:DialogHost>-->
 </Window>

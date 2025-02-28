@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Common.Message
 {
     /// <summary>
-    /// run before mainview close
+    /// run dispose event before mainview close
     /// </summary>
     public record MainViewCloseMessage();
 }
