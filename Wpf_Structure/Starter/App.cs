@@ -42,12 +42,19 @@ namespace Starter
             InitAsync();
         }
 
+        /// <summary>
+        /// run after appear mainwindow
+        /// </summary>
         private async void InitAsync()
         {
             await WaitShowWindow();
             WeakReferenceMessenger.Default.Send(new MainViewInitMessage());
         }
 
+        /// <summary>
+        /// wait appear mainwindow
+        /// </summary>
+        /// <returns></returns>
         private async Task WaitShowWindow()
         {
             bool active = false;
