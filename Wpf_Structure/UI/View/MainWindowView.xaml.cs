@@ -41,19 +41,7 @@ namespace UI.View
             _isExiting = true;
             e.Cancel = true;
             base.OnClosing(e);
-
-            EndProcess();
-        }
-
-        /// <summary>
-        /// process before close mainwindow
-        /// </summary>
-        private static async void EndProcess()
-        {
-            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "exit..."));
             WeakReferenceMessenger.Default.Send(new MainViewCloseMessage());
-            await Task.Delay(500);
-            Application.Current.Shutdown();
         }
     }
 }

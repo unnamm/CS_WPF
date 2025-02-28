@@ -17,6 +17,7 @@ namespace UI.ViewModel
 
         public MainWindowViewModel()
         {
+            Receive(new BusyMessage(true, "loading..."));
             IsActive = true;
         }
 

@@ -43,7 +43,6 @@ namespace Starter
             AutoCreateSingleTon();
             AutoConnectViewAndViewModel();
 
-            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
             Startup += (x, y) => _mainView.Show(); //mainwindow show
         }
 
