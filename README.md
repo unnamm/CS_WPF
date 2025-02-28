@@ -1,9 +1,9 @@
-#License
+# License
 
-CommunityToolkit.Mvvm - MIT
+- CommunityToolkit.Mvvm - MIT
 
-Microsoft.Extensions.Hosting - MIT
+- Microsoft.Extensions.Hosting - MIT
 
-BusyIndicators - MIT
+- BusyIndicators - MIT
 
-MaterialDesignThemes - MIT
+- MaterialDesignThemes - MIT
