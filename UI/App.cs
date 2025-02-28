@@ -54,13 +54,33 @@ namespace UI
 
             SettingView();
 
-            Startup += App_Startup;
+            Startup += (x, y) => _mainView.Show();
+
+            InitAsync();
         }
 
-        private void App_Startup(object sender, StartupEventArgs e)
+        private async void InitAsync()
         {
-            _mainView.Show(); //async show
-            //_mainView.ShowDialog(); //sync show
+            await WaitShowWindow();
+
+
+        }
+
+        private async Task WaitShowWindow()
+        {
+            bool active = false;
+            while (true)
+            {
+                await Task.Delay(1);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    active = _mainView.IsActive;
+                });
+
+                if (active == true)
+                    break;
+            }
         }
 
         /// <summary>

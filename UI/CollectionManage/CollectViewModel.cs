@@ -12,20 +12,20 @@ namespace UI.CollectionManage
         public ICollectionView Sources2 { get; } //devide to filter
         public ICollectionView Sources3 { get; } //devide to filter
 
-        private readonly ObservableCollection<string> _list = [];
+        private ObservableCollection<string> MyList { get; } = [];
 
         public CollectViewModel()
         {
             foreach (var i in Enumerable.Range(0, 10))
             {
-                _list.Add("data" + i);
+                MyList.Add("data" + i);
             }
 
             //one collection, each ICollectionView has different filter
-            Sources1 = new CollectionViewSource { Source = _list }.View;
-            Sources2 = new CollectionViewSource { Source = _list }.View;
+            Sources1 = new CollectionViewSource { Source = MyList }.View;
+            Sources2 = new CollectionViewSource { Source = MyList }.View;
             Sources2.Filter = x => ((string)x).Contains('1') == true;
-            Sources3 = new CollectionViewSource { Source = _list }.View;
+            Sources3 = new CollectionViewSource { Source = MyList }.View;
             Sources3.Filter = x => ((string)x).Contains('2') == true;
 
             StartTick();
@@ -37,9 +37,12 @@ namespace UI.CollectionManage
             {
                 await Task.Delay(1000);
 
+                if (Application.Current == null)
+                    return;
+
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    _list.Add("data" + _list.Count);
+                    MyList.Add("data" + MyList.Count);
                 });
             }
         }
