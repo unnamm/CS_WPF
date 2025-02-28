@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using UI.View;
+using UI.ViewModel;
 
 namespace Starter
 {
@@ -28,7 +29,7 @@ namespace Starter
             _servicesCollection = builder.Services;
 
             #region add
-            _servicesCollection.AddSingleton<MainWindowView>();
+            AddViewAndViewModel<MainWindowView, MainWindowViewModel>();
             #endregion
 
             _serviceProvider = builder.Build().Services;
@@ -48,7 +49,10 @@ namespace Starter
         private async void InitAsync()
         {
             await WaitShowWindow();
+            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
             WeakReferenceMessenger.Default.Send(new MainViewInitMessage());
+            await Task.Delay(1000);
+            WeakReferenceMessenger.Default.Send(new BusyMessage(false));
         }
 
         /// <summary>
