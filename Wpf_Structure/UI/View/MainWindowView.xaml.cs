@@ -19,6 +19,7 @@ namespace UI.View
         public MainWindowView()
         {
             InitializeComponent();
+            Style = (Style)FindResource("MaterialDesignWindow");
         }
     }
 }

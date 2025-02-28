@@ -81,10 +81,6 @@ namespace Starter
             foreach (var pair in _viewPair)
             {
                 var uc = (ContentControl)Ioc.Default.GetService(pair.Key)!;
-                if (uc.DataContext != null)
-                {
-                    throw new Exception($"{uc} is already allocated DataContext");
-                }
                 uc.DataContext = Ioc.Default.GetService(pair.Value) ?? throw new Exception("viewmodel null");
             }
         }
