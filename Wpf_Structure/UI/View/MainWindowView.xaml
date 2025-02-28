@@ -18,8 +18,10 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
-            
-        </busyIndicator:BusyMask>
+        <materialDesign:DialogHost DialogTheme="Inherit" Identifier="RootDialog">
+            <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
+
+            </busyIndicator:BusyMask>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>

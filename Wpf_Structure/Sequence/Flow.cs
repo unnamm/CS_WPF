@@ -3,16 +3,20 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace Sequence
 {
-    public class Flow : IRecipient<MainViewInitMessage>
+    /// <summary>
+    /// flow program sequence
+    /// </summary>
+    public class Flow
     {
         public Flow()
         {
             WeakReferenceMessenger.Default.RegisterAll(this);
         }
 
-        public void Receive(MainViewInitMessage message)
+        public async void Init()
         {
-            //init all function
+            await Task.Delay(1000); //init time
+            WeakReferenceMessenger.Default.Send(new BusyMessage(false));
         }
     }
 }

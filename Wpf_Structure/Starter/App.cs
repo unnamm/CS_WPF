@@ -1,8 +1,10 @@
 ﻿using Common.Message;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Messaging;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sequence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,7 @@ namespace Starter
             _servicesCollection = builder.Services;
 
             #region add
+            _servicesCollection.AddSingleton<Flow>();
             AddViewAndViewModel<MainWindowView, MainWindowViewModel>();
             #endregion
 
@@ -50,9 +53,7 @@ namespace Starter
         {
             await WaitShowWindow();
             WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
-            WeakReferenceMessenger.Default.Send(new MainViewInitMessage());
-            await Task.Delay(1000);
-            WeakReferenceMessenger.Default.Send(new BusyMessage(false));
+            _serviceProvider.GetService<Flow>()!.Init();
         }
 
         /// <summary>

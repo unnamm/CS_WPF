@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sequence\Sequence.csproj" />
     <ProjectReference Include="..\UI\UI.csproj" />
   </ItemGroup>
 
