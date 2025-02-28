@@ -27,6 +27,13 @@ namespace UI.View
             Style = (Style)FindResource("MaterialDesignWindow");
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
+            WeakReferenceMessenger.Default.Send(new MainWindowRenderedMessage());
+        }
+
         protected override void OnClosing(CancelEventArgs e)
         {
             if (_isExiting == true)
@@ -46,7 +53,7 @@ namespace UI.View
         {
             WeakReferenceMessenger.Default.Send(new BusyMessage(true, "exit..."));
             WeakReferenceMessenger.Default.Send(new MainViewCloseMessage());
-            await Task.Delay(1000);
+            await Task.Delay(500);
             Application.Current.Shutdown();
         }
     }

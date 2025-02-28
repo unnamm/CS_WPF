@@ -1,5 +1,4 @@
 ﻿using Common.Message;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Messaging;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -16,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UI.ViewModel;
 
 namespace UI.View
 {
@@ -32,13 +30,28 @@ namespace UI.View
             WeakReferenceMessenger.Default.RegisterAll(this);
         }
 
+        private async void SampleTest()
+        {
+            await Task.Delay(1000);
+            WeakReferenceMessenger.Default.Send(new DialogMessage("title", "Content"));
+            await Task.Delay(1000);
+            WeakReferenceMessenger.Default.Send(new DialogMessage("title2", "Content2"));
+        }
+
         public void Receive(DialogMessage message)
         {
             _ = Application.Current.Dispatcher.Invoke(async () =>
             {
+                const string dialogIdentifier = "RootDialog";
+
+                if (DialogHost.IsDialogOpen(dialogIdentifier))
+                {
+                    DialogHost.Close(dialogIdentifier);
+                }
+
                 TitleText.Text = message.Title;
                 ContentText.Text = message.Content;
-                await DialogHost.Show(this, "RootDialog");
+                await DialogHost.Show(this, dialogIdentifier);
             });
         }
     }

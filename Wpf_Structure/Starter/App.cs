@@ -1,7 +1,4 @@
-﻿using Common.Message;
-using CommunityToolkit.Mvvm.DependencyInjection;
-using CommunityToolkit.Mvvm.Messaging;
-using MaterialDesignThemes.Wpf;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sequence;
@@ -24,6 +21,7 @@ namespace Starter
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceCollection _servicesCollection;
         private readonly Dictionary<Type, Type?> _viewPair = []; //view, viewmodel pair
+        private readonly List<Type> _singletonList = [];
 
         public App()
         {
@@ -31,8 +29,8 @@ namespace Starter
             _servicesCollection = builder.Services;
 
             #region add
-            _servicesCollection.AddSingleton<Flow>();
-            AddView<DialogView>();
+            AddSingleTon<Flow>();
+            AddSingleTon<DialogView>();
             AddViewAndViewModel<MainWindowView, MainWindowViewModel>();
             #endregion
 
@@ -40,42 +38,10 @@ namespace Starter
             Ioc.Default.ConfigureServices(_serviceProvider);
             _mainView = _serviceProvider.GetService<MainWindowView>()!;
 
+            AutoCreateSingleTon();
             AutoConnectViewAndViewModel();
 
             Startup += (x, y) => _mainView.Show(); //mainwindow show
-
-            InitAsync();
-        }
-
-        /// <summary>
-        /// run after appear mainwindow
-        /// </summary>
-        private async void InitAsync()
-        {
-            await WaitShowWindow();
-            WeakReferenceMessenger.Default.Send(new BusyMessage(true, "loading..."));
-            _serviceProvider.GetService<Flow>()!.Init();
-        }
-
-        /// <summary>
-        /// wait appear mainwindow
-        /// </summary>
-        /// <returns></returns>
-        private async Task WaitShowWindow()
-        {
-            bool active = false;
-            while (true)
-            {
-                await Task.Delay(1);
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    active = _mainView.IsActive;
-                });
-
-                if (active == true)
-                    break;
-            }
         }
 
         /// <summary>
@@ -96,6 +62,17 @@ namespace Starter
         }
 
         /// <summary>
+        /// auto make instance
+        /// </summary>
+        private void AutoCreateSingleTon()
+        {
+            foreach (var item in _singletonList)
+            {
+                _serviceProvider.GetService(item);
+            }
+        }
+
+        /// <summary>
         /// add view and viewmodel
         /// </summary>
         /// <typeparam name="View"></typeparam>
@@ -108,10 +85,14 @@ namespace Starter
             _viewPair.Add(typeof(View), typeof(ViewModel));
         }
 
-        private void AddView<View>() where View : ContentControl
+        /// <summary>
+        /// add singleton class
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        private void AddSingleTon<T>() where T : class
         {
-            _servicesCollection.AddSingleton<View>();
-            _viewPair.Add(typeof(View), null);
+            _servicesCollection.AddSingleton<T>();
+            _singletonList.Add(typeof(T));
         }
 
     }
