@@ -21,10 +21,13 @@ namespace Sequence
         {
             try
             {
-                await Task.Delay(500); //init time
-                WeakReferenceMessenger.Default.Send(new BusyMessage(false));
+                //do init
 
-                AutoLog();
+                await Task.Delay(500); //init time
+
+                SampleTest();
+
+                WeakReferenceMessenger.Default.Send(new BusyMessage(false));
             }
             catch (Exception ex)
             {
@@ -33,27 +36,33 @@ namespace Sequence
             }
         }
 
-        private async void AutoLog()
-        {
-            while (true)
-            {
-                await Task.Delay(1000);
-                _log.Write("test");
-            }
-        }
-
         public async void Receive(MainViewCloseMessage message)
         {
             WeakReferenceMessenger.Default.Send(new BusyMessage(true, "exit..."));
             try
             {
+                //do dispose
+
                 await Task.Delay(500); //dispose time
+
                 Environment.Exit(0);
             }
             catch (Exception ex)
             {
                 WeakReferenceMessenger.Default.Send(new DialogMessage("dispose error", ex.Message));
                 _log.Write(ex.Message);
+            }
+        }
+
+        private async void SampleTest()
+        {
+            WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content"));
+
+            int i = 0;
+            while (true)
+            {
+                await Task.Delay(1000);
+                _log.Write("test" + i++);
             }
         }
 

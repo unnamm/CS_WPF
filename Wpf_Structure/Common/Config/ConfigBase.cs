@@ -136,7 +136,7 @@ namespace Common.Config
         /// <param name="key"></param>
         /// <exception cref="NullReferenceException"></exception>
         /// <exception cref="NotImplementedException"></exception>
-        protected void Set<T>(T value, string section, [CallerArgumentExpression("value")] string key = "")
+        protected void Set<T>(T value, string section, [CallerArgumentExpression(nameof(value))] string key = "")
         {
             if (value == null)
             {

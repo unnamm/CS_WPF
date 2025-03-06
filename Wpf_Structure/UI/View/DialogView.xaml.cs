@@ -20,36 +20,27 @@ namespace UI.View
 {
     public partial class DialogView : UserControl, IRecipient<DialogMessage>
     {
+        public const string DialogIdentifire = "RootDialog";
+
         public DialogView()
         {
             InitializeComponent();
 
             WeakReferenceMessenger.Default.RegisterAll(this);
-            SampleTest();
-        }
-
-        private async void SampleTest()
-        {
-            await Task.Delay(1000);
-            WeakReferenceMessenger.Default.Send(new DialogMessage("title", "Content"));
-            await Task.Delay(1000);
-            WeakReferenceMessenger.Default.Send(new DialogMessage("title2", "Content2"));
         }
 
         public void Receive(DialogMessage message)
         {
-            _ = Application.Current.Dispatcher.Invoke(async () =>
+            Application.Current.Dispatcher.Invoke(async () =>
             {
-                const string dialogIdentifier = "RootDialog";
-
-                if (DialogHost.IsDialogOpen(dialogIdentifier))
+                if (DialogHost.IsDialogOpen(DialogIdentifire))
                 {
-                    DialogHost.Close(dialogIdentifier);
+                    DialogHost.Close(DialogIdentifire);
                 }
 
                 TitleText.Text = message.Title;
                 ContentText.Text = message.Content;
-                await DialogHost.Show(this, dialogIdentifier);
+                await DialogHost.Show(this, DialogIdentifire);
             });
         }
     }

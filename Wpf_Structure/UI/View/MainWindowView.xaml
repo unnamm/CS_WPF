@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <materialDesign:DialogHost DialogTheme="Inherit" Identifier="RootDialog">
+    <materialDesign:DialogHost DialogTheme="Inherit" Identifier="{Binding DialogIdentifier}">
         <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
             <Grid>
                 <Grid.RowDefinitions>

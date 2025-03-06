@@ -1,7 +1,10 @@
 ﻿using Common.Config;
+using Common.Message;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,12 +56,18 @@ namespace Common
 
             message = $"[{DateTime.Now:HH:mm:ss.f}] {message}";
 
-            LogList.Insert(0, message); //insert first
+            File.AppendAllText(_fileName, message + Environment.NewLine);
+
+            WeakReferenceMessenger.Default.Send(new InvokeMessage(WriteUICollection, message));
+        }
+
+        private void WriteUICollection(string message)
+        {
+            LogList.Insert(0, message);
             if (LogList.Count > _maxLine)
             {
                 LogList.RemoveAt(LogList.Count - 1);
             }
-            File.AppendAllText(_fileName, message + Environment.NewLine);
         }
     }
 }
