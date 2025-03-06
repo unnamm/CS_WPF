@@ -6,12 +6,26 @@
              xmlns:local="clr-namespace:UI.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="content grid0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Grid.Row="0" Text="MaterialDesignBody1TextBlock" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            <TextBlock Grid.Row="0" Text="MaterialDesignBody2TextBlock" Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+            <TextBlock Grid.Row="0" Text="MaterialDesignButtonTextBlock" Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+            <TextBlock Grid.Row="0" Text="MaterialDesignCaptionTextBlock" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+        </StackPanel>
+
         <ListView Grid.Row="1" ItemsSource="{Binding LogInstance.LogList}" Background="Transparent"/>
     </Grid>
 </UserControl>
