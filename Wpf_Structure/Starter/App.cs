@@ -43,8 +43,10 @@ namespace Starter
             Ioc.Default.ConfigureServices(_serviceProvider);
 
             _mainView = _serviceProvider.GetService<MainWindowView>()!;
-            _serviceProvider.GetService<Flow>(); //instance flow
+
             AutoConnectViewAndViewModel();
+            _serviceProvider.GetService<Flow>(); //instance
+            _serviceProvider.GetService<DialogView>(); //instance
 
             Startup += (x, y) => _mainView.Show(); //mainwindow show
         }

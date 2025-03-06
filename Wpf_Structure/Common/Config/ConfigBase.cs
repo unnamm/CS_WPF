@@ -13,26 +13,26 @@ namespace Common.Config
         /// <summary>
         /// read value
         /// </summary>
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         private static extern uint GetPrivateProfileString(
             string section, string key, string defaultValue, StringBuilder returnedString, uint size, string filePath);
 
         /// <summary>
         /// read array
         /// </summary>
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         private static extern uint GetPrivateProfileSection(string IpAppName, byte[] IpPairValues, uint nSize, string IpFileName);
 
         /// <summary>
         /// write value
         /// </summary>
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         private static extern bool WritePrivateProfileString(string section, string key, string value, string filePath);
 
         /// <summary>
         /// write array
         /// </summary>
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         private static extern bool WritePrivateProfileSection(string lpAppName, string lpString, string lpFileName);
 
         private readonly int _capacity;
@@ -71,7 +71,7 @@ namespace Common.Config
         /// <param name="section"></param>
         /// <param name="key">value param name</param>
         /// <exception cref="NotImplementedException"></exception>
-        protected void Get<T>(ref T value, string section, [CallerArgumentExpression("value")] string key = "")
+        protected void Get<T>(ref T value, string section, [CallerArgumentExpression(nameof(value))] string key = "")
         {
             if (typeof(T) == typeof(string[]))
             {

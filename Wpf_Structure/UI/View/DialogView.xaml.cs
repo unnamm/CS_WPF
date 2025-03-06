@@ -25,6 +25,7 @@ namespace UI.View
             InitializeComponent();
 
             WeakReferenceMessenger.Default.RegisterAll(this);
+            SampleTest();
         }
 
         private async void SampleTest()
