@@ -27,7 +27,7 @@
                 </Grid.RowDefinitions>
 
                 <local:TitleView Grid.Row="0"/>
-                <local:ContentView Grid.Row="1"/>
+                <Frame x:Name="ContentFrame" Grid.Row="1"/>
 
             </Grid>
         </busyIndicator:BusyMask>

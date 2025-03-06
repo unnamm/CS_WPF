@@ -1,4 +1,5 @@
-﻿using Common.Message;
+﻿using Common;
+using Common.Message;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using System;

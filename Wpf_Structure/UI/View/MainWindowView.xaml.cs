@@ -21,10 +21,12 @@ namespace UI.View
     {
         private bool _isExiting;
 
-        public MainWindowView()
+        public MainWindowView(ContentView content)
         {
             InitializeComponent();
             Style = (Style)FindResource("MaterialDesignWindow");
+
+            ContentFrame.Content = content;
         }
 
         protected override void OnContentRendered(EventArgs e)

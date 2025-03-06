@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UI.View
 {
-    /// <summary>
-    /// ContentView.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class ContentView : UserControl
     {
         public ContentView()
