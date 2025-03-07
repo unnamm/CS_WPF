@@ -6,6 +6,7 @@
 
 # License
 
+- YamlDotNet - MIT
 - BusyIndicators - MIT
 - MaterialDesignThemes - MIT
 - CommunityToolkit.Mvvm - MIT
