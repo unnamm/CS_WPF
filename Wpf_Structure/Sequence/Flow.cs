@@ -27,16 +27,18 @@ namespace Sequence
                 //do init
 
                 await Task.Run(() => _yamlData.InitMember());
+                
                 LogSampleTest();
-
                 WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content")); //popup sample test
-
-                WeakReferenceMessenger.Default.Send(new BusyMessage(false)); //close wait
             }
             catch (Exception ex)
             {
                 WeakReferenceMessenger.Default.Send(new DialogMessage("init error", ex.Message));
                 _log.Write(ex.Message);
+            }
+            finally
+            {
+                WeakReferenceMessenger.Default.Send(new BusyMessage(false)); //close wait
             }
         }
 
