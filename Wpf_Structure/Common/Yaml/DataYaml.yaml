@@ -1,0 +1,13 @@
+﻿
+int: 3
+string: lorem ipsum
+double: 3.5
+
+array:
+    - apple
+    - banana
+    - 12345
+    - a: b
+    - b: b
+  
+json style array: ["apple", banana, 12345, a: b]

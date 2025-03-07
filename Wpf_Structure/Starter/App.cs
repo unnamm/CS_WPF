@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Config;
+using Common.Yaml;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +33,7 @@ namespace Starter
             #region add
             _servicesCollection.AddSingleton<Log>();
             _servicesCollection.AddSingleton<Flow>();
+            _servicesCollection.AddSingleton<DataYaml>();
             _servicesCollection.AddSingleton<DataConfig>();
             _servicesCollection.AddSingleton<DialogView>();
 

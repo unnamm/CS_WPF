@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Message;
+using Common.Yaml;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace Sequence
@@ -10,11 +11,13 @@ namespace Sequence
     public class Flow : IRecipient<MainWindowRenderedMessage>, IRecipient<MainViewCloseMessage>
     {
         private readonly Log _log;
+        private readonly DataYaml _yamlData;
 
-        public Flow(Log log)
+        public Flow(Log log, DataYaml dataYaml)
         {
             WeakReferenceMessenger.Default.RegisterAll(this);
             _log = log;
+            _yamlData = dataYaml;
         }
 
         public async void Receive(MainWindowRenderedMessage message)
@@ -23,11 +26,12 @@ namespace Sequence
             {
                 //do init
 
-                await Task.Delay(500); //init time
+                await Task.Run(() => _yamlData.InitMember());
+                LogSampleTest();
 
-                SampleTest();
+                WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content")); //popup sample test
 
-                WeakReferenceMessenger.Default.Send(new BusyMessage(false));
+                WeakReferenceMessenger.Default.Send(new BusyMessage(false)); //close wait
             }
             catch (Exception ex)
             {
@@ -54,10 +58,8 @@ namespace Sequence
             }
         }
 
-        private async void SampleTest()
+        private async void LogSampleTest()
         {
-            WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content"));
-
             int i = 0;
             while (true)
             {
