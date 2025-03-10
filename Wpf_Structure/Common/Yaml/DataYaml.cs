@@ -23,5 +23,8 @@ namespace Common.Yaml
 
         [YamlMember(Alias = "json style array")]
         public object[] Data5 { get; set; } = [];
+
+        [YamlMember(Alias = "values")]
+        public int[] Data6 { get; set; } = [];
     }
 }

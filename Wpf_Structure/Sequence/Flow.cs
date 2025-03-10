@@ -25,9 +25,8 @@ namespace Sequence
             try
             {
                 //do init
+                _yamlData.Load();
 
-                await Task.Run(() => _yamlData.InitMember());
-                
                 LogSampleTest();
                 WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content")); //popup sample test
             }

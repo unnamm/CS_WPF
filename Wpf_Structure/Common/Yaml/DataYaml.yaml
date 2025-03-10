@@ -11,3 +11,9 @@ array:
     - b: b
   
 json style array: ["apple", banana, 12345, a: b]
+
+values:
+    - 1
+    - 2
+    - 3
+
