@@ -1,5 +1,5 @@
-﻿using Common.Config;
-using Common.Message;
+﻿using Common.Message;
+using Common.Yaml;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
@@ -15,16 +15,14 @@ namespace Common
     {
         public ObservableCollection<string> LogList { get; set; } = []; //print list ui
 
-        private readonly int _maxLine; //print list max line
-        private readonly string _folderPath;
+        private readonly DataYaml _config;
 
         private string _fileName = string.Empty;
         private DateTime _beforeDay;
 
-        public Log(DataConfig config)
+        public Log(DataYaml config)
         {
-            _maxLine = config.LogMaxLine;
-            _folderPath = config.LogFolderName;
+            _config = config;
         }
 
         /// <summary>
@@ -35,12 +33,12 @@ namespace Common
         {
             _beforeDay = DateTime.Now;
 
-            if (Directory.Exists(_folderPath) == false)
+            if (Directory.Exists(_config.LogFolderName) == false)
             {
-                Directory.CreateDirectory(_folderPath);
+                Directory.CreateDirectory(_config.LogFolderName);
             }
 
-            _fileName = Path.Combine(_folderPath, _beforeDay.ToString("yyyy-MM-dd") + ".txt");
+            _fileName = Path.Combine(_config.LogFolderName, _beforeDay.ToString("yyyy-MM-dd") + ".txt");
         }
 
         /// <summary>
@@ -64,7 +62,7 @@ namespace Common
         private void WriteUICollection(string message)
         {
             LogList.Insert(0, message);
-            if (LogList.Count > _maxLine)
+            if (LogList.Count > _config.LogMaxLine)
             {
                 LogList.RemoveAt(LogList.Count - 1);
             }

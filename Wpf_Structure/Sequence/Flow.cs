@@ -16,8 +16,8 @@ namespace Sequence
         public Flow(Log log, DataYaml dataYaml)
         {
             WeakReferenceMessenger.Default.RegisterAll(this);
-            _log = log;
             _yamlData = dataYaml;
+            _log = log;
         }
 
         public async void Receive(MainWindowRenderedMessage message)

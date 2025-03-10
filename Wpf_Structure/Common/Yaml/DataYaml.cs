@@ -9,22 +9,10 @@ namespace Common.Yaml
 {
     public class DataYaml : YamlBase
     {
-        [YamlMember(Alias = "string")]
-        public string Data1 { get; set; } = string.Empty;
+        [YamlMember(Alias = "logMaxLine")]
+        public int LogMaxLine { get; set; }
 
-        [YamlMember(Alias = "int")]
-        public int Data2 { get; set; }
-
-        [YamlMember(Alias = "double")]
-        public double Data3 { get; set; }
-
-        [YamlMember(Alias = "array")]
-        public object[] Data4 { get; set; } = [];
-
-        [YamlMember(Alias = "json style array")]
-        public object[] Data5 { get; set; } = [];
-
-        [YamlMember(Alias = "values")]
-        public int[] Data6 { get; set; } = [];
+        [YamlMember(Alias = "logFolderName")]
+        public string LogFolderName { get; set; } = string.Empty;
     }
 }

@@ -12,9 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Config\DataConfig.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Yaml\DataYaml.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

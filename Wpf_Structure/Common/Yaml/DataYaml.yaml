@@ -1,19 +1,19 @@
 ﻿
-int: 3
-string: lorem ipsum
-double: 3.5
+logMaxLine: 100
+logFolderName: Log
 
-array:
-    - apple
-    - banana
-    - 12345
-    - a: b
-    - b: b
+# #object array
+# array:
+#     - apple
+#     - banana
+#     - 12345
+#     - a: b
+#     - b: b
   
-json style array: ["apple", banana, 12345, a: b]
+# json style array: ["apple", banana, 12345, a: b]
 
-values:
-    - 1
-    - 2
-    - 3
-
+# #array
+# values:
+#     - 1
+#     - 2
+#     - 3

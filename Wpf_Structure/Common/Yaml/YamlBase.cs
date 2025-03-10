@@ -1,5 +1,4 @@
-﻿using Common.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +9,7 @@ using YamlDotNet.Serialization;
 
 namespace Common.Yaml
 {
-    public abstract class YamlBase : IConfig
+    public abstract class YamlBase
     {
         private string _filePath = string.Empty;
 
