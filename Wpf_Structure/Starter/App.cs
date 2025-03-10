@@ -22,7 +22,7 @@ namespace Starter
         private readonly MainWindowView _mainView;
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceCollection _servicesCollection;
-        private readonly Dictionary<Type, Type?> _viewPair = [];
+        private readonly Dictionary<Type, Type> _viewPair = [];
 
         public App()
         {
@@ -59,8 +59,8 @@ namespace Starter
         {
             foreach (var pair in _viewPair)
             {
-                var uc = (ContentControl)_serviceProvider.GetService(pair.Key)!;
-                uc.DataContext = _serviceProvider.GetService(pair.Value!) ?? throw new Exception("viewmodel null");
+                var cc = (ContentControl)_serviceProvider.GetService(pair.Key)!;
+                cc.DataContext = _serviceProvider.GetService(pair.Value) ?? throw new Exception("viewmodel null");
             }
         }
 
