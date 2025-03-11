@@ -13,26 +13,28 @@ namespace Common.Yaml
     {
         private string _filePath = string.Empty;
 
-        public void Load()
+        public async Task LoadAsync()
         {
             var myType = this.GetType();
 
             _filePath = myType.Name + ".yaml";
             _filePath = Path.Combine("Yaml", _filePath); //Yaml\\class.yaml
 
-            var target = new DeserializerBuilder().Build().Deserialize(File.ReadAllText(_filePath), myType);
+            var readText = await File.ReadAllTextAsync(_filePath);
+
+            var data = new DeserializerBuilder().Build().Deserialize(readText, myType);
 
             var properties = GetType().GetProperties();
             foreach (PropertyInfo propertyInfo in properties)
             {
-                propertyInfo.SetValue(this, propertyInfo.GetValue(target));
+                propertyInfo.SetValue(this, propertyInfo.GetValue(data));
             }
         }
 
-        public void Save()
+        public Task SaveAsync()
         {
             var temp = new SerializerBuilder().Build().Serialize(this);
-            File.WriteAllText(_filePath, temp);
+            return File.WriteAllTextAsync(_filePath, temp);
         }
 
     }
