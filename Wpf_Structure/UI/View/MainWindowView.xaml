@@ -20,16 +20,54 @@
 
     <materialDesign:DialogHost DialogTheme="Inherit" Identifier="{Binding DialogIdentifier}">
         <busyIndicator:BusyMask IndicatorType="Swirl" BusyContent="{Binding BusyText}" IsBusy="{Binding IsBusy}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                <materialDesign:DrawerHost.LeftDrawerContent>
+                    <DockPanel>
+                        
+                        <!--menu button-->
+                        <ToggleButton DockPanel.Dock="Top" HorizontalAlignment="Right"
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
-                <local:TitleView Grid.Row="0"/>
-                <Frame x:Name="ContentFrame" Grid.Row="1"/>
+                        <!--menu list-->
+                        <ListBox x:Name="MenuListBox"
+                                 PreviewMouseLeftButtonUp="MenuListBox_PreviewMouseLeftButtonUp"
+                                 ItemsSource="{Binding MenuItems}"
+                                 SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
 
-            </Grid>
+                            <!--list enable binding-->
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+
+                            <!--list font-->
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource MaterialDesignDisplaySmallTextBlock}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </DockPanel>
+                </materialDesign:DrawerHost.LeftDrawerContent>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--menu button-->
+                    <ToggleButton Grid.Row="0" x:Name="MenuToggleButton" HorizontalAlignment="Left"
+                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                    
+                    <!--main screen control-->
+                    <ContentControl Grid.Row="1" Content="{Binding Context, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"
+                                    DataContext="{Binding SelectedItem}"/>
+                </Grid>
+            </materialDesign:DrawerHost>
         </busyIndicator:BusyMask>
     </materialDesign:DialogHost>
 </Window>

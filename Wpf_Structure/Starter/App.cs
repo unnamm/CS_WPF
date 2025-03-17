@@ -23,6 +23,7 @@ namespace Starter
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceCollection _servicesCollection;
         private readonly Dictionary<Type, Type> _viewPair = [];
+        private readonly List<Type> _menuViews = [];
 
         public App()
         {
@@ -35,7 +36,8 @@ namespace Starter
             _servicesCollection.AddSingleton<DataYaml>();
             _servicesCollection.AddSingleton<DialogView>();
 
-            AddViewAndViewModel<ContentView, ContentViewModel>();
+            AddViewAndViewModel<ContentView, ContentViewModel>(true);
+            AddViewAndViewModel<SettingView, SettingViewModel>(true);
             AddViewAndViewModel<MainWindowView, MainWindowViewModel>();
             #endregion
 
@@ -45,8 +47,8 @@ namespace Starter
             _mainView = _serviceProvider.GetService<MainWindowView>()!;
 
             AutoConnectViewAndViewModel();
-            _serviceProvider.GetService<Flow>(); //instance
-            _serviceProvider.GetService<DialogView>(); //instance
+            _serviceProvider.GetService<Flow>(); //make instance, receive message
+            _serviceProvider.GetService<DialogView>(); //make instance, receive message
 
             Startup += (x, y) => _mainView.Show(); //mainwindow show
         }
@@ -62,6 +64,16 @@ namespace Starter
                 var cc = (ContentControl)_serviceProvider.GetService(pair.Key)!;
                 cc.DataContext = _serviceProvider.GetService(pair.Value) ?? throw new Exception("viewmodel null");
             }
+
+            var mainVM = _serviceProvider.GetService<MainWindowViewModel>()!;
+
+            foreach (var view in _menuViews)
+            {
+                var cc = (ContentControl)_serviceProvider.GetService(view)!;
+                mainVM.MenuItems.Add(new UI.Model.ItemMenu(view.Name.Replace("View", ""), cc));
+            }
+
+            mainVM.SelectedItem = mainVM.MenuItems.First(); //set default content
         }
 
         /// <summary>
@@ -69,12 +81,18 @@ namespace Starter
         /// </summary>
         /// <typeparam name="View"></typeparam>
         /// <typeparam name="ViewModel"></typeparam>
-        private void AddViewAndViewModel<View, ViewModel>() where View : ContentControl where ViewModel : class
+        /// <param name="isShowMenuList">show menu list</param>
+        private void AddViewAndViewModel<View, ViewModel>(bool isShowMenuList = false) where View : ContentControl where ViewModel : class
         {
             _viewPair.Add(typeof(View), typeof(ViewModel));
 
             _servicesCollection.AddSingleton<View>();
             _servicesCollection.AddSingleton<ViewModel>();
+
+            if (isShowMenuList)
+            {
+                _menuViews.Add(typeof(View));
+            }
         }
 
     }

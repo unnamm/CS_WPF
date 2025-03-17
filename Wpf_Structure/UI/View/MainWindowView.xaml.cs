@@ -24,9 +24,7 @@ namespace UI.View
         public MainWindowView(ContentView content)
         {
             InitializeComponent();
-            Style = (Style)FindResource("MaterialDesignWindow");
-
-            ContentFrame.Content = content;
+            base.Style = (Style)FindResource("MaterialDesignWindow");
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -44,6 +42,16 @@ namespace UI.View
             e.Cancel = true;
             base.OnClosing(e);
             WeakReferenceMessenger.Default.Send(new MainViewCloseMessage());
+        }
+
+        /// <summary>
+        /// Occurs when the left mouse button is released while the mouse pointer is over this element.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MenuToggleButton.IsChecked = false;
         }
     }
 }

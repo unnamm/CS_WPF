@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace UI.View
 {
-    public partial class TitleView : UserControl
+    public partial class SettingView : UserControl
     {
-        public TitleView()
+        public SettingView()
         {
             InitializeComponent();
         }

@@ -3,10 +3,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using UI.Model;
 using UI.View;
 
 namespace UI.ViewModel
@@ -17,6 +19,9 @@ namespace UI.ViewModel
         [ObservableProperty] private bool _isBusy;
         [ObservableProperty] private string _busyText = string.Empty;
         [ObservableProperty] private string _dialogIdentifier;
+        [ObservableProperty] private ItemMenu _selectedItem;
+
+        public ObservableCollection<ItemMenu> MenuItems { get; } = [];
 
         public MainWindowViewModel()
         {
