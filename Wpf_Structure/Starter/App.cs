@@ -1,5 +1,5 @@
 ﻿using Common;
-using Common.Yaml;
+using Common.Config;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,8 +22,8 @@ namespace Starter
         private readonly MainWindowView _mainView;
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceCollection _servicesCollection;
-        private readonly Dictionary<Type, Type> _viewPair = [];
         private readonly List<Type> _menuViews = [];
+        private readonly Dictionary<Type, Type> _viewPairs = [];
 
         public App()
         {
@@ -59,20 +59,18 @@ namespace Starter
         /// <exception cref="Exception"></exception>
         private void AutoConnectViewAndViewModel()
         {
-            foreach (var pair in _viewPair)
+            foreach (var pair in _viewPairs)
             {
                 var cc = (ContentControl)_serviceProvider.GetService(pair.Key)!;
                 cc.DataContext = _serviceProvider.GetService(pair.Value) ?? throw new Exception("viewmodel null");
             }
 
             var mainVM = _serviceProvider.GetService<MainWindowViewModel>()!;
-
             foreach (var view in _menuViews)
             {
                 var cc = (ContentControl)_serviceProvider.GetService(view)!;
                 mainVM.MenuItems.Add(new UI.Model.ItemMenu(view.Name.Replace("View", ""), cc));
             }
-
             mainVM.SelectedItem = mainVM.MenuItems.First(); //set default content
         }
 
@@ -84,7 +82,7 @@ namespace Starter
         /// <param name="isShowMenuList">show menu list</param>
         private void AddViewAndViewModel<View, ViewModel>(bool isShowMenuList = false) where View : ContentControl where ViewModel : class
         {
-            _viewPair.Add(typeof(View), typeof(ViewModel));
+            _viewPairs.Add(typeof(View), typeof(ViewModel));
 
             _servicesCollection.AddSingleton<View>();
             _servicesCollection.AddSingleton<ViewModel>();

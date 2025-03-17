@@ -17,9 +17,9 @@ namespace UI.ViewModel
         IRecipient<BusyMessage>, IRecipient<InvokeMessage>
     {
         [ObservableProperty] private bool _isBusy;
-        [ObservableProperty] private string _busyText = string.Empty;
+        [ObservableProperty] private string? _busyText;
         [ObservableProperty] private string _dialogIdentifier;
-        [ObservableProperty] private ItemMenu _selectedItem;
+        [ObservableProperty] private ItemMenu? _selectedItem;
 
         public ObservableCollection<ItemMenu> MenuItems { get; } = [];
 

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 
-namespace Common.Yaml
+namespace Common.Config
 {
     public abstract class YamlBase
     {
@@ -16,9 +16,10 @@ namespace Common.Yaml
         public async Task LoadAsync()
         {
             var myType = this.GetType();
+            var folderName = myType.Namespace!.Split('.').Last();
 
             _filePath = myType.Name + ".yaml";
-            _filePath = Path.Combine("Yaml", _filePath); //Yaml\\class.yaml
+            _filePath = Path.Combine(folderName, _filePath);
 
             var readText = await File.ReadAllTextAsync(_filePath);
 

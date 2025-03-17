@@ -1,6 +1,6 @@
 ﻿using Common;
 using Common.Message;
-using Common.Yaml;
+using Common.Config;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace Sequence
@@ -16,8 +16,8 @@ namespace Sequence
         public Flow(Log log, DataYaml dataYaml)
         {
             WeakReferenceMessenger.Default.RegisterAll(this);
-            _yamlData = dataYaml;
             _log = log;
+            _yamlData = dataYaml;
         }
 
         public async void Receive(MainWindowRenderedMessage message)
@@ -27,8 +27,7 @@ namespace Sequence
                 //do init
                 await _yamlData.LoadAsync();
 
-                LogSampleTest();
-                WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content")); //popup sample test
+                SampleTest();
             }
             catch (Exception ex)
             {
@@ -59,13 +58,15 @@ namespace Sequence
             }
         }
 
-        private async void LogSampleTest()
+        private async void SampleTest()
         {
+            WeakReferenceMessenger.Default.Send(new DialogMessage("title", "content")); //popup sample test
+
             int i = 0;
             while (true)
             {
-                await Task.Delay(1000);
                 _log.Write("test" + i++);
+                await Task.Delay(1000);
             }
         }
 

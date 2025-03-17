@@ -23,7 +23,7 @@
             <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
                 <materialDesign:DrawerHost.LeftDrawerContent>
                     <DockPanel>
-                        
+
                         <!--menu button-->
                         <ToggleButton DockPanel.Dock="Top" HorizontalAlignment="Right"
                                       IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
@@ -49,7 +49,6 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-
                     </DockPanel>
                 </materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -58,14 +57,14 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    
+
                     <!--menu button-->
                     <ToggleButton Grid.Row="0" x:Name="MenuToggleButton" HorizontalAlignment="Left"
                                   Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
-                    
+
                     <!--main screen control-->
-                    <ContentControl Grid.Row="1" Content="{Binding Context, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"
-                                    DataContext="{Binding SelectedItem}"/>
+                    <ContentControl Grid.Row="1" DataContext="{Binding SelectedItem}"
+                                    Content="{Binding Context, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"/>
                 </Grid>
             </materialDesign:DrawerHost>
         </busyIndicator:BusyMask>

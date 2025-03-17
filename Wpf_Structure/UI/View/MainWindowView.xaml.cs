@@ -19,9 +19,9 @@ namespace UI.View
 {
     public partial class MainWindowView : Window
     {
-        private bool _isExiting;
+        private bool _isExiting; //wait exit
 
-        public MainWindowView(ContentView content)
+        public MainWindowView()
         {
             InitializeComponent();
             base.Style = (Style)FindResource("MaterialDesignWindow");
@@ -51,7 +51,7 @@ namespace UI.View
         /// <param name="e"></param>
         private void MenuListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            MenuToggleButton.IsChecked = false;
+            MenuToggleButton.IsChecked = false; //auto close
         }
     }
 }
