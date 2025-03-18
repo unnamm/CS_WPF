@@ -11,19 +11,20 @@ namespace Common.Config
 {
     public abstract class YamlBase
     {
-        private string _filePath = string.Empty;
+        private readonly string _filePath;
 
-        public async Task LoadAsync()
+        public YamlBase()
         {
             var myType = this.GetType();
             var folderName = myType.Namespace!.Split('.').Last();
+            _filePath = Path.Combine(folderName, myType.Name + ".yaml");
+        }
 
-            _filePath = myType.Name + ".yaml";
-            _filePath = Path.Combine(folderName, _filePath);
-
+        public async Task LoadAsync()
+        {
             var readText = await File.ReadAllTextAsync(_filePath);
 
-            var data = new DeserializerBuilder().Build().Deserialize(readText, myType);
+            var data = new DeserializerBuilder().Build().Deserialize(readText, this.GetType());
 
             var properties = GetType().GetProperties();
             foreach (PropertyInfo propertyInfo in properties)

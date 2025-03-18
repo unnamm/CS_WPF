@@ -25,7 +25,7 @@
                     <DockPanel>
 
                         <!--menu button-->
-                        <ToggleButton DockPanel.Dock="Top" HorizontalAlignment="Right"
+                        <ToggleButton DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="10"
                                       IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                                       Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
@@ -45,7 +45,7 @@
                             <!--list font-->
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" Style="{StaticResource MaterialDesignDisplaySmallTextBlock}"/>
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="5"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -58,9 +58,11 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <!--menu button-->
-                    <ToggleButton Grid.Row="0" x:Name="MenuToggleButton" HorizontalAlignment="Left"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                    <Grid Background="YellowGreen">
+                        <!--menu button-->
+                        <ToggleButton Grid.Row="0" x:Name="MenuToggleButton" HorizontalAlignment="Left" Margin="10"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                    </Grid>
 
                     <!--main screen control-->
                     <ContentControl Grid.Row="1" DataContext="{Binding SelectedItem}"

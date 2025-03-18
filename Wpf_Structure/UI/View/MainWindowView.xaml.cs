@@ -51,7 +51,7 @@ namespace UI.View
         /// <param name="e"></param>
         private void MenuListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            MenuToggleButton.IsChecked = false; //auto close
+            MenuToggleButton.IsChecked = false; //auto menu tab close
         }
     }
 }

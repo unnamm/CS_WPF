@@ -27,7 +27,7 @@ namespace Sequence
                 //do init
                 await _yamlData.LoadAsync();
 
-                SampleTest();
+                //SampleTest();
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace Sequence
 
                 await Task.Delay(500); //dispose time
 
-                Environment.Exit(0);
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
             catch (Exception ex)
             {
