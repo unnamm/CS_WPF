@@ -1,10 +1,11 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace UI.ConvertManage
 {
-    internal class BoolToColorConvert : IValueConverter
+    internal class BoolToColorConvert : MarkupExtension, IValueConverter
     {
         //viewmodel -> ui
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -28,6 +29,11 @@ namespace UI.ConvertManage
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
 }
