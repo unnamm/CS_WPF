@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Configuration/Configuration.csproj" />
+  <Project Path="Log/Log.csproj" />
+  <Project Path="Starter/Starter.csproj" />
+  <Project Path="View/View.csproj" />
+</Solution>
