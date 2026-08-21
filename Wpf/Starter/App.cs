@@ -5,9 +5,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Resources;
 using System.Text;
 using System.Windows;
 using View;
+using Wpf.Ui.Markup;
 
 namespace Starter
 {
@@ -22,6 +24,9 @@ namespace Starter
         {
             try
             {
+                Resources.MergedDictionaries.Add(new ThemesDictionary());
+                Resources.MergedDictionaries.Add(new ControlsDictionary());
+
                 var builder = Host.CreateApplicationBuilder();
 
                 builder.Configuration
