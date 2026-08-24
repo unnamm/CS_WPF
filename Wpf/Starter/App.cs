@@ -32,7 +32,7 @@ namespace Starter
                 var builder = Host.CreateApplicationBuilder();
 
                 builder.Configuration
-                    .AddJsonFile("Config/appsettings.json", false, true)
+                    .AddJsonFile(Appsettings.FilePath, false, true)
                     ;
                 builder.Logging
                     .AddFilter<FileLoggerProvider>("", LogLevel.Warning)
@@ -40,7 +40,7 @@ namespace Starter
                     ;
                 builder.Services
                     .AddHostedService<Run>()
-                    .Configure<Appsettings>(builder.Configuration.GetSection("Appsettings"))
+                    .Configure<Appsettings>(builder.Configuration.GetSection(Appsettings.SectionName))
                     .AddSingleton<ViewLoggerProvider>()
                     .AddSingleton<FileLoggerProvider>()
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<ViewLoggerProvider>())
