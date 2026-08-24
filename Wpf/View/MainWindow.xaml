@@ -8,19 +8,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <!--<ui:NavigationView>
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="Dashboard"/>
-            </ui:NavigationView.MenuItems>
-            <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem Content="Setting"/>
-            </ui:NavigationView.FooterMenuItems>
+        <ui:NavigationView x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}">
             <ui:NavigationView.Header>
                 <TextBlock Text="Header"/>
             </ui:NavigationView.Header>
-        </ui:NavigationView>-->
+        </ui:NavigationView>
 
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -31,6 +25,6 @@
         <Grid Grid.Row="1">
             <TextBlock Text="default.ListView"/>
             <ListBox ItemsSource="{Binding LogList}" Margin="0, 20"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </Window>

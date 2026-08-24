@@ -41,13 +41,13 @@ namespace Starter
                 builder.Services
                     .AddHostedService<Run>()
                     .Configure<Appsettings>(builder.Configuration.GetSection("Appsettings"))
-                    .AddSingleton<ILoggerProvider, ViewLoggerProvider>()
                     .AddSingleton<ViewLoggerProvider>()
                     .AddSingleton<FileLoggerProvider>()
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<ViewLoggerProvider>())
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
-                    .AddSingleton<MainWindow>()
-                    .AddSingleton<MainWindowViewModel>()
+                    .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
+                    .AddSingleton<Dashboard>().AddSingleton<DashboardViewModel>()
+                    .AddSingleton<Setting>().AddSingleton<SettingViewModel>()
                     ;
 
                 _host = builder.Build();

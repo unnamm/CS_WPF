@@ -3,24 +3,35 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Wpf.Ui.Controls;
 
 namespace View
 {
     public class MainWindowViewModel
     {
-        public ObservableCollection<Log.LogEntry> LogList { get; set; }
+        public ObservableCollection<object> MenuItems { get; set; } = [];
+        public ObservableCollection<object> FooterMenuItems { get; set; } = [];
 
-        readonly ILogger<MainWindowViewModel> _logger;
-
-        public MainWindowViewModel(ILogger<MainWindowViewModel> logger, Log.ViewLoggerProvider logProvider)
+        public MainWindowViewModel(ILogger<MainWindowViewModel> logger)
         {
-            LogList = logProvider.Logs;
-            _logger = logger;
-
             foreach (var level in Enum.GetValues<LogLevel>())
             {
-                _logger.Log(level, "log level={level}", level);
+                logger.Log(level, "log level={level}", level);
             }
+
+            MenuItems.Add(new NavigationViewItem
+            {
+                Content = "Dashboard",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Smartwatch24 },
+                TargetPageType = typeof(Dashboard)
+            });
+
+            FooterMenuItems.Add(new NavigationViewItem
+            {
+                Content = "Setting",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Options48 },
+                TargetPageType = typeof(Setting)
+            });
         }
     }
 }

@@ -8,20 +8,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace View
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// Setting.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Setting : Page
     {
-        public MainWindow(MainWindowViewModel vm, IServiceProvider serviceProvider)
+        public Setting(SettingViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-            RootNavigation.SetServiceProvider(serviceProvider);
         }
     }
 }
