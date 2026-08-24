@@ -1,0 +1,1 @@
+nuget-license -i "wpf.slnx" -o Markdown -fo "licenses.md"
