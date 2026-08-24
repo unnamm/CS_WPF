@@ -28,8 +28,8 @@ namespace View
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
-            if (RootNavigation.MenuItems[0] is NavigationViewItem { TargetPageType: { } pageType })
-                RootNavigation.Navigate(pageType);
+            var item = (NavigationViewItem)RootNavigation.MenuItems[0]!;
+            RootNavigation.Navigate(item.TargetPageType!);
         }
     }
 }
