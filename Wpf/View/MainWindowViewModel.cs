@@ -14,6 +14,7 @@ namespace View
 
         public MainWindowViewModel(ILogger<MainWindowViewModel> logger)
         {
+            logger.LogInformation("test log print");
             foreach (var level in Enum.GetValues<LogLevel>())
             {
                 logger.Log(level, "log level={level}", level);
@@ -22,14 +23,14 @@ namespace View
             MenuItems.Add(new NavigationViewItem
             {
                 Content = "Dashboard",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Smartwatch24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Home16 },
                 TargetPageType = typeof(Dashboard)
             });
 
             FooterMenuItems.Add(new NavigationViewItem
             {
                 Content = "Setting",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Options48 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Options16 },
                 TargetPageType = typeof(Setting)
             });
         }

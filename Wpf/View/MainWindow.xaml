@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ui:NavigationView x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}">
+        <ui:NavigationView x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
             <ui:NavigationView.Header>
-                <TextBlock Text="Header"/>
+                <TextBlock Text="Main Header"/>
             </ui:NavigationView.Header>
         </ui:NavigationView>
     </Grid>
