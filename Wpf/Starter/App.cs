@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Resources;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using View;
 using Wpf.Ui.Markup;
 
@@ -29,6 +30,9 @@ namespace Starter
 
                 var builder = Host.CreateApplicationBuilder();
 
+                var viewContainer = new ViewContainer(builder.Services);
+                viewContainer.AddViewViewModel<MainWindow, MainWindowViewModel>();
+
                 builder.Configuration
                     .AddJsonFile("Config/appsettings.json", false, true)
                     ;
@@ -38,14 +42,14 @@ namespace Starter
                     ;
                 builder.Services
                     .AddHostedService<Run>()
-                    .AddSingleton<MainWindow>()
-                    .AddSingleton<MainWindowViewModel>()
+                    .AddSingleton(viewContainer)
                     .AddSingleton<Log.ViewLoggerProvider>()
                     .AddSingleton<Log.FileLoggerProvider>()
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<Log.ViewLoggerProvider>())
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<Log.FileLoggerProvider>())
                     .Configure<Appsettings>(builder.Configuration.GetSection("Appsettings"))
                     ;
+
                 _host = builder.Build();
             }
             catch (Exception ex)

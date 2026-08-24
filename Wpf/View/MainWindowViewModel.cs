@@ -17,10 +17,10 @@ namespace View
             LogList = logProvider.Logs;
             _logger = logger;
 
-            _logger.LogInformation("info");
-            _logger.LogWarning("warning");
-            _logger.LogError("error");
-            _logger.LogCritical("critical");
+            foreach (var level in Enum.GetValues<LogLevel>())
+            {
+                _logger.Log(level, "log level={level}", level);
+            }
         }
     }
 }

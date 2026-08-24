@@ -11,10 +11,10 @@ namespace Starter
     {
         readonly MainWindow _main;
 
-        public Run(MainWindow main, MainWindowViewModel vm)
+        public Run(ViewContainer vc, IServiceProvider sp, MainWindow main)
         {
             _main = main;
-            _main.DataContext = vm;
+            vc.ConnectContext(sp);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
