@@ -13,18 +13,5 @@
                 <TextBlock Text="Header"/>
             </ui:NavigationView.Header>
         </ui:NavigationView>
-
-        <!--<Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <TextBlock Text="ui.ListView"/>
-            <ui:ListView ItemsSource="{Binding LogList}" Margin="0, 20"/>
-        </Grid>
-        <Grid Grid.Row="1">
-            <TextBlock Text="default.ListView"/>
-            <ListBox ItemsSource="{Binding LogList}" Margin="0, 20"/>
-        </Grid>-->
     </Grid>
 </Window>

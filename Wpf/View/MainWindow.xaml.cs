@@ -22,6 +22,7 @@ namespace View
             InitializeComponent();
             DataContext = vm;
             RootNavigation.SetServiceProvider(serviceProvider);
+            Loaded += (_, _) => RootNavigation.Navigate(typeof(Dashboard));
         }
     }
 }
