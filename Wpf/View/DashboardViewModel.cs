@@ -7,7 +7,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace View
 {
-    public class DashboardViewModel : INavigationAware
+    public class DashboardViewModel : NavigationAware
     {
         public ObservableCollection<Log.LogEntry> LogList { get; set; }
 
@@ -17,19 +17,33 @@ namespace View
         {
             LogList = logProvider.Logs;
             _logger = logger;
-            logger.LogInformation("DashboardViewModel");
+            logger.LogInformation("instance DashboardViewModel");
         }
 
-        public Task OnNavigatedToAsync()
+        public override void OnNavigatedTo()
         {
-            _logger.LogInformation("open DashboardViewModel");
-            return Task.CompletedTask;
+            base.OnNavigatedTo();
+            _logger.LogInformation("to DashboardViewModel");
         }
 
-        public Task OnNavigatedFromAsync()
+        public override void OnNavigatedFrom()
         {
-            _logger.LogInformation("close DashboardViewModel");
-            return Task.CompletedTask;
+            base.OnNavigatedFrom();
+            _logger.LogInformation("from DashboardViewModel");
+        }
+
+        public override async Task OnNavigatedToAsync()
+        {
+            await base.OnNavigatedToAsync();
+            await Task.Delay(1000);
+            _logger.LogInformation("to delay DashboardViewModel");
+        }
+
+        public override async Task OnNavigatedFromAsync()
+        {
+            await base.OnNavigatedFromAsync();
+            await Task.Delay(1000);
+            _logger.LogInformation("from delay DashboardViewModel");
         }
     }
 }

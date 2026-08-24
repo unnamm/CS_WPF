@@ -6,7 +6,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace View
 {
-    public class SettingViewModel : INavigationAware
+    public class SettingViewModel : NavigationAware
     {
         readonly ILogger _logger;
 
@@ -16,16 +16,16 @@ namespace View
             logger.LogInformation("setting");
         }
 
-        public Task OnNavigatedFromAsync()
+        public override void OnNavigatedTo()
         {
-            _logger.LogInformation("open settingView");
-            return Task.CompletedTask;
+            base.OnNavigatedTo();
+            _logger.LogInformation("to SettingViewModel");
         }
 
-        public Task OnNavigatedToAsync()
+        public override void OnNavigatedFrom()
         {
-            _logger.LogInformation("close settingView");
-            return Task.CompletedTask;
+            base.OnNavigatedFrom();
+            _logger.LogInformation("from SettingViewModel");
         }
     }
 }
