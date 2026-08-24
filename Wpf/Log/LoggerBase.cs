@@ -7,9 +7,9 @@ namespace Log
 {
     internal class LoggerBase : ILogger
     {
-        private readonly string _categoryName;
-        private readonly IEntrySink _provider;
-        private readonly Func<IExternalScopeProvider?> _scopeProviderAccessor;
+        readonly string _categoryName;
+        readonly IEntrySink _provider;
+        readonly Func<IExternalScopeProvider?> _scopeProviderAccessor;
 
         public LoggerBase(string categoryName, IEntrySink provider, Func<IExternalScopeProvider?> scopeProviderAccessor)
         {

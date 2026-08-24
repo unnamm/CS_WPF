@@ -1,4 +1,5 @@
 ﻿using Configuration.Config;
+using Log;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,24 +31,23 @@ namespace Starter
 
                 var builder = Host.CreateApplicationBuilder();
 
-                var viewContainer = new ViewContainer(builder.Services);
-                viewContainer.AddViewViewModel<MainWindow, MainWindowViewModel>();
-
                 builder.Configuration
                     .AddJsonFile("Config/appsettings.json", false, true)
                     ;
                 builder.Logging
-                    .AddFilter<Log.FileLoggerProvider>("", LogLevel.Warning)
-                    .AddFilter<Log.ViewLoggerProvider>("", LogLevel.Information)
+                    .AddFilter<FileLoggerProvider>("", LogLevel.Warning)
+                    .AddFilter<ViewLoggerProvider>("", LogLevel.Information)
                     ;
                 builder.Services
                     .AddHostedService<Run>()
-                    .AddSingleton(viewContainer)
-                    .AddSingleton<Log.ViewLoggerProvider>()
-                    .AddSingleton<Log.FileLoggerProvider>()
-                    .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<Log.ViewLoggerProvider>())
-                    .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<Log.FileLoggerProvider>())
                     .Configure<Appsettings>(builder.Configuration.GetSection("Appsettings"))
+                    .AddSingleton<ILoggerProvider, ViewLoggerProvider>()
+                    .AddSingleton<ViewLoggerProvider>()
+                    .AddSingleton<FileLoggerProvider>()
+                    .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<ViewLoggerProvider>())
+                    .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
+                    .AddSingleton<MainWindow>()
+                    .AddSingleton<MainWindowViewModel>()
                     ;
 
                 _host = builder.Build();
