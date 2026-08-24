@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wpf.Ui.Controls;
 
 namespace View
 {
@@ -22,7 +23,13 @@ namespace View
             InitializeComponent();
             DataContext = vm;
             RootNavigation.SetServiceProvider(serviceProvider);
-            Loaded += (_, _) => RootNavigation.Navigate(typeof(Dashboard));
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            if (RootNavigation.MenuItems[0] is NavigationViewItem { TargetPageType: { } pageType })
+                RootNavigation.Navigate(pageType);
         }
     }
 }
