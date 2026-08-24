@@ -1,4 +1,4 @@
-namespace Configuration.Config
+namespace Configuration
 {
     public interface IConfigSection
     {

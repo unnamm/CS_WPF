@@ -1,4 +1,5 @@
-﻿using Configuration.Config;
+﻿using Configuration;
+using Configuration.Config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
