@@ -8,7 +8,7 @@ using System.Text;
 namespace Log
 {
     /// <summary>
-    /// save local path ex)D:\Log\2026-08-21.txt
+    /// save log in local path
     /// </summary>
     public class FileLoggerProvider : ILoggerProvider, ISupportExternalScope, IEntrySink
     {

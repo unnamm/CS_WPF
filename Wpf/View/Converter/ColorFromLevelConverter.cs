@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace View.Converter
 {
+    /// <summary>
+    /// LogLevel -> Brush
+    /// </summary>
     internal class ColorFromLevelConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

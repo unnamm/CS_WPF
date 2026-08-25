@@ -14,10 +14,12 @@ namespace View
 
         public MainWindowViewModel(ILogger<MainWindowViewModel> logger)
         {
-            logger.LogInformation("test log print");
-            foreach (var level in Enum.GetValues<LogLevel>())
+            using (logger.BeginScope("print test log"))
             {
-                logger.Log(level, "log level={level}", level);
+                foreach (var level in Enum.GetValues<LogLevel>())
+                {
+                    logger.Log(level, "log level: {level}", level);
+                }
             }
 
             MenuItems.Add(new NavigationViewItem

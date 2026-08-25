@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -13,22 +14,19 @@ using Wpf.Ui.Controls;
 
 namespace View
 {
-    /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow(MainWindowViewModel vm, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             DataContext = vm;
-            RootNavigation.SetServiceProvider(serviceProvider);
+            RootNavigation.SetServiceProvider(serviceProvider); //Navigation use serviceprovider
         }
 
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
-            var item = (NavigationViewItem)RootNavigation.MenuItems[0]!;
+            var item = RootNavigation.MenuItems[0] as NavigationViewItem ?? throw new NullReferenceException();
             RootNavigation.Navigate(item.TargetPageType!);
         }
     }

@@ -6,7 +6,7 @@ namespace Configuration
 {
     public static class OptionsMonitorExtensions
     {
-        public static void Save<T>(this IOptionsMonitor<T> monitor) where T : class, IConfigSection
+        public static void Save<T>(this IOptionsMonitor<T> monitor) where T : IConfigSection
         {
             var root = JsonNode.Parse(File.ReadAllText(T.FilePath))!;
             root[T.SectionName] = JsonSerializer.SerializeToNode(monitor.CurrentValue);

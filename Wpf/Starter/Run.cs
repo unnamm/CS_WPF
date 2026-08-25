@@ -7,6 +7,9 @@ using View;
 
 namespace Starter
 {
+    /// <summary>
+    /// host service
+    /// </summary>
     internal class Run : BackgroundService
     {
         readonly MainWindow _main;
