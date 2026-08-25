@@ -1,4 +1,5 @@
-﻿using Configuration.Config;
+﻿using Configuration;
+using Configuration.Config;
 using Log;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,8 +50,12 @@ namespace Starter
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
                     .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
                     .AddSingleton<Dashboard>().AddSingleton<DashboardViewModel>()
-                    .AddSingleton<Setting>().AddSingleton<SettingViewModel>()
                     ;
+
+                foreach (var configType in ConfigSectionRegistry.All)
+                {
+                    builder.Services.AddSingleton(typeof(View.Settings.SettingSectionPage<>).MakeGenericType(configType));
+                }
 
                 _host = builder.Build();
             }

@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+using Configuration;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using View.Settings;
 using Wpf.Ui.Controls;
 
 namespace View
@@ -29,12 +29,15 @@ namespace View
                 TargetPageType = typeof(Dashboard)
             });
 
-            FooterMenuItems.Add(new NavigationViewItem
+            foreach (var configType in ConfigSectionRegistry.All)
             {
-                Content = "Setting",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Options16 },
-                TargetPageType = typeof(Setting)
-            });
+                FooterMenuItems.Add(new NavigationViewItem
+                {
+                    Content = configType.Name,
+                    Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+                    TargetPageType = typeof(SettingSectionPage<>).MakeGenericType(configType)
+                });
+            }
         }
     }
 }

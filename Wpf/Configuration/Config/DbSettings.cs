@@ -8,5 +8,6 @@ namespace Configuration.Config
         public string? Ip { get; set; }
         public string? Id { get; set; }
         public string? Password { get; set; }
+        public double Test { get; set; }
     }
 }
