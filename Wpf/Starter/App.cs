@@ -62,7 +62,7 @@ namespace Starter
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "build error");
-                Shutdown();
+                Environment.Exit(1);
             }
         }
 
