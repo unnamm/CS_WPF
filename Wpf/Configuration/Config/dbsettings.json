@@ -1,8 +1,5 @@
 {
   "DbSettings": {
-    "Ip": "192.168.0.1",
-    "Id": "admin",
-    "Password": "1234",
-    "Test": 12.34
+    "Path": "Database/sqlite.db"
   }
 }

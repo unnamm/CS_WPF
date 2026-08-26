@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Configuration/Configuration.csproj" />
+  <Project Path="Database/Database.csproj" Id="e1fc882f-c594-446f-9469-63d86f999baa" />
   <Project Path="Log/Log.csproj" />
   <Project Path="Starter/Starter.csproj" />
   <Project Path="View/View.csproj" />
