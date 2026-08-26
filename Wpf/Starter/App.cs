@@ -56,13 +56,12 @@ namespace Starter
                 {
                     builder.Services.AddSingleton(typeof(View.Settings.SettingSectionPage<>).MakeGenericType(configType));
                 }
-
                 _host = builder.Build();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "build error");
-                Environment.Exit(1);
+                this.Shutdown();
             }
         }
 
@@ -80,7 +79,7 @@ namespace Starter
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "host error");
-                Shutdown();
+                this.Shutdown();
             }
         }
 
