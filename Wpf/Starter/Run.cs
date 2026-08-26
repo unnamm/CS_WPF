@@ -17,12 +17,14 @@ namespace Starter
     {
         readonly ILogger _logger;
         readonly MainWindow _main;
+        readonly LoadingWindow _loading;
         readonly SQLite _db;
 
-        public Run(MainWindow main, ILogger<Run> logger, ViewLoggerProvider viewLog, SQLite db)
+        public Run(MainWindow main, LoadingWindow loading, ILogger<Run> logger, ViewLoggerProvider viewLog, SQLite db)
         {
             _logger = logger;
             _main = main;
+            _loading = loading;
             _db = db;
 
             viewLog.SetInvoker(Application.Current.Dispatcher.Invoke);
@@ -30,16 +32,26 @@ namespace Starter
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
+            try
+            {
+                _loading.Show();
+                _loading.SetStatus("connecting database...");
+                await _db.ConnectAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("StartAsync() {ex.Message}", ex.Message);
+            }
+
+            _loading.Close();
             _main.Show();
-            await _db.ConnectAsync(cancellationToken);
 
             await base.StartAsync(cancellationToken);
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await Task.Delay(1000, stoppingToken);
-            _logger.LogInformation("execute");
+            return Task.CompletedTask;
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)

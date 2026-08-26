@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1280">
     <Grid>
         <ui:NavigationView x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
             <ui:NavigationView.Header>
