@@ -25,14 +25,6 @@ namespace View.Settings
                 Source = new Uri("/View;component/Settings/SettingFieldTemplates.xaml", UriKind.Relative)
             });
 
-            foreach (var property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                if (!property.CanRead || !property.CanWrite)
-                    continue;
-
-                Fields.Add(new SettingFieldViewModel(monitor.CurrentValue, property));
-            }
-
             var itemsControl = new ItemsControl
             {
                 ItemsSource = Fields,
@@ -45,7 +37,20 @@ namespace View.Settings
             Content = stack;
         }
 
-        public Task OnNavigatedToAsync() => Task.CompletedTask;
+        public Task OnNavigatedToAsync()
+        {
+            Fields.Clear();
+
+            foreach (var property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!property.CanRead || !property.CanWrite)
+                    continue;
+
+                Fields.Add(new SettingFieldViewModel(_monitor.CurrentValue, property));
+            }
+
+            return Task.CompletedTask;
+        }
 
         public Task OnNavigatedFromAsync()
         {
