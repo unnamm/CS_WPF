@@ -5,15 +5,19 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using Wpf.Ui.Abstractions.Controls;
 
 namespace View.Settings
 {
-    public class SettingSectionPage<T> : Page where T : class, IConfigSection
+    public class SettingSectionPage<T> : Page, INavigationAware where T : class, IConfigSection
     {
+        readonly IOptionsMonitor<T> _monitor;
+
         public ObservableCollection<SettingFieldViewModel> Fields { get; } = [];
 
         public SettingSectionPage(IOptionsMonitor<T> monitor)
         {
+            _monitor = monitor;
             Title = typeof(T).Name;
 
             Resources.MergedDictionaries.Add(new ResourceDictionary
@@ -35,19 +39,18 @@ namespace View.Settings
                 ItemTemplateSelector = new SettingFieldTemplateSelector()
             };
 
-            var saveButton = new Wpf.Ui.Controls.Button
-            {
-                Content = "저장",
-                Padding = new Thickness(10),
-                HorizontalAlignment = HorizontalAlignment.Left
-            };
-            saveButton.Click += (_, _) => monitor.Save();
-
             var stack = new StackPanel { Margin = new Thickness(20) };
             stack.Children.Add(itemsControl);
-            stack.Children.Add(saveButton);
 
             Content = stack;
+        }
+
+        public Task OnNavigatedToAsync() => Task.CompletedTask;
+
+        public Task OnNavigatedFromAsync()
+        {
+            _monitor.Save();
+            return Task.CompletedTask;
         }
     }
 }
