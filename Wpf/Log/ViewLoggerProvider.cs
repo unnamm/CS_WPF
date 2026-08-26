@@ -26,9 +26,9 @@ namespace Log
         {
             _uiInvoker(() =>
             {
-                Logs.Add(log);
+                Logs.Insert(0, log);
                 while (Logs.Count > _options.CurrentValue.LogMaxValue)
-                    Logs.RemoveAt(0);
+                    Logs.RemoveAt(Logs.Count - 1);
             });
         }
 

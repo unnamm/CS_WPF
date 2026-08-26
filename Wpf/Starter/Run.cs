@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Log;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,17 +15,32 @@ namespace Starter
     internal class Run : BackgroundService
     {
         readonly MainWindow _main;
+        readonly ILogger _logger;
 
-        public Run(MainWindow main)
+        public Run(MainWindow main, ILogger<Run> logger, ViewLoggerProvider viewLog)
         {
             _main = main;
+            _logger = logger;
+
+            viewLog.SetInvoker(Application.Current.Dispatcher.Invoke);
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        public override Task StartAsync(CancellationToken cancellationToken)
         {
-            Application.Current.Dispatcher.Invoke(_main.Show);
+            _main.Show();
 
-            return Task.CompletedTask;
+            return base.StartAsync(cancellationToken);
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            await Task.Delay(1000, stoppingToken);
+            _logger.LogInformation("execute");
+        }
+
+        public override Task StopAsync(CancellationToken cancellationToken)
+        {
+            return base.StopAsync(cancellationToken);
         }
     }
 }
