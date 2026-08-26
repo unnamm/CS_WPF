@@ -1,5 +1,5 @@
-﻿using Log;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Database;
+using Log;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,21 +16,22 @@ namespace Starter
     internal class Run : BackgroundService
     {
         readonly ILogger _logger;
-        readonly IServiceProvider _service;
+        readonly MainWindow _main;
+        readonly SQLite _db;
 
-        public Run(MainWindow main, ILogger<Run> logger, ViewLoggerProvider viewLog, IServiceProvider service)
+        public Run(MainWindow main, ILogger<Run> logger, ViewLoggerProvider viewLog, SQLite db)
         {
             _logger = logger;
-            _service = service;
+            _main = main;
+            _db = db;
 
             viewLog.SetInvoker(Application.Current.Dispatcher.Invoke);
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
-            _service.GetRequiredService<MainWindow>().Show();
-            var db = _service.GetRequiredService<Database.SQLite>();
-            await db.ConnectAsync(cancellationToken);
+            _main.Show();
+            await _db.ConnectAsync(cancellationToken);
 
             await base.StartAsync(cancellationToken);
         }
