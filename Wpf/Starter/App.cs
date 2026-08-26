@@ -50,6 +50,7 @@ namespace Starter
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
                     .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
                     .AddSingleton<Dashboard>().AddSingleton<DashboardViewModel>()
+                    .AddSingleton<Database.SQLite>()
                     ;
 
                 foreach (var configType in ConfigSectionRegistry.All)
