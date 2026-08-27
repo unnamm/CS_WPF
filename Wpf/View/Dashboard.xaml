@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:View"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      xmlns:converter="clr-namespace:View.Converter"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Dashboard">
@@ -28,8 +27,6 @@
 
             <ui:Button Content="Login" Command="{Binding LoginCommand}" HorizontalAlignment="Stretch" Appearance="Primary" Margin="0,0,0,8"/>
             <ui:Button Content="Sign Up" Command="{Binding GoToSignUpCommand}" HorizontalAlignment="Stretch"/>
-
-            <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,12,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
         </StackPanel>
 
         <!-- Sign Up -->
@@ -48,8 +45,6 @@
 
             <ui:Button Content="Sign Up" Command="{Binding SignUpCommand}" HorizontalAlignment="Stretch" Appearance="Primary" Margin="0,0,0,8"/>
             <ui:Button Content="Back" Command="{Binding GoToLoginCommand}" HorizontalAlignment="Stretch"/>
-
-            <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,12,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>
