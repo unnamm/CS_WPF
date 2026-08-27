@@ -10,17 +10,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using View.Rapper;
 using Wpf.Ui.Controls;
 
 namespace View
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(MainWindowViewModel vm, IServiceProvider serviceProvider)
+        public MainWindow(MainWindowViewModel vm, IServiceProvider serviceProvider, AppNavigator navigator)
         {
             InitializeComponent();
             DataContext = vm;
             RootNavigation.SetServiceProvider(serviceProvider); //Navigation use serviceprovider
+            navigator.SetNavigationControl(RootNavigation); // set navigation
         }
 
         protected override void OnSourceInitialized(EventArgs e)

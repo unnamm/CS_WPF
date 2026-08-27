@@ -50,6 +50,7 @@ namespace Starter
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
                     .AddSingleton<LoadingWindow>()
                     .AddSingleton<View.Model.UserSession>()
+                    .AddSingleton<View.Rapper.AppNavigator>()
                     .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
                     .AddSingleton<Dashboard>().AddSingleton<DashboardViewModel>()
                     .AddSingleton<HomePage>().AddSingleton<HomePageViewModel>()

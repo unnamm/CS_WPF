@@ -1,5 +1,4 @@
 ﻿using Database;
-using Log;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,7 +19,7 @@ namespace Starter
         readonly LoadingWindow _loading;
         readonly SQLite _db;
 
-        public Run(MainWindow main, LoadingWindow loading, ILogger<Run> logger, ViewLoggerProvider viewLog, SQLite db)
+        public Run(MainWindow main, LoadingWindow loading, ILogger<Run> logger, Log.ViewLoggerProvider viewLog, SQLite db)
         {
             _logger = logger;
             _main = main;

@@ -4,6 +4,7 @@ using Database;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using View.Model;
+using View.Rapper;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace View
@@ -14,6 +15,7 @@ namespace View
         readonly ILogger _logger;
         readonly SQLite _db;
         readonly UserSession _session;
+        readonly AppNavigator _navigator;
         [ObservableProperty][NotifyPropertyChangedFor(nameof(IsLoginMode))] public partial bool IsSignUpMode { get; set; }
         public bool IsLoginMode => !IsSignUpMode;
         [ObservableProperty] public partial string? LoginId { get; set; }
@@ -22,11 +24,12 @@ namespace View
         [ObservableProperty] public partial string? SignUpPassword { get; set; }
         [ObservableProperty] public partial string? SignUpPasswordConfirm { get; set; }
 
-        public DashboardViewModel(ILogger<DashboardViewModel> logger, SQLite db, UserSession session)
+        public DashboardViewModel(ILogger<DashboardViewModel> logger, SQLite db, UserSession session, AppNavigator navigator)
         {
             _logger = logger;
             _db = db;
             _session = session;
+            _navigator = navigator;
         }
 
         [RelayCommand] void GoToSignUp() => IsSignUpMode = true;
@@ -57,6 +60,8 @@ namespace View
 
                 _session.CurrentUserId = LoginId;
                 _logger.LogInformation("login success: {id}", LoginId);
+
+                _navigator.Navigate(typeof(HomePage));
             }
             catch (Exception ex)
             {
@@ -111,7 +116,7 @@ namespace View
         public override void OnNavigatedTo()
         {
             base.OnNavigatedTo();
-            // show before login id
+            LoginPassword = null;
         }
     }
 }
