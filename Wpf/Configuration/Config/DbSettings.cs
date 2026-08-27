@@ -1,3 +1,5 @@
+using Configuration.Enums;
+
 namespace Configuration.Config
 {
     public class DbSettings : IConfigSection
@@ -6,5 +8,6 @@ namespace Configuration.Config
         public static string SectionName => nameof(DbSettings);
 
         public string? Path { get; set; }
+        public TestLevel Level { get; set; }
     }
 }
