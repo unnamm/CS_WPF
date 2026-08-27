@@ -13,6 +13,8 @@ namespace View
     public partial class MainWindowViewModel : ObservableObject
     {
         readonly AppNavigator _navigator;
+        readonly NavigationViewItem _dashboardMenuItem;
+        readonly NavigationViewItem _homeMenuItem;
 
         public ObservableCollection<object> MenuItems { get; } = [];
         public ObservableCollection<object> FooterMenuItems { get; } = [];
@@ -25,8 +27,8 @@ namespace View
             Session = session;
             _navigator = navigator;
 
-            AddMenu<Dashboard>(SymbolRegular.Key16);
-            AddMenu<HomePage>(SymbolRegular.Home16);
+            _dashboardMenuItem = AddMenu<Dashboard>(SymbolRegular.Key16);
+            _homeMenuItem = AddMenu<HomePage>(SymbolRegular.Home16);
 
             foreach (var configType in ConfigSectionRegistry.All)
             {
@@ -37,16 +39,31 @@ namespace View
                     TargetPageType = typeof(SettingSectionPage<>).MakeGenericType(configType)
                 });
             }
+
+            Session.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(Session.CurrentUserId)) UpdateMenuState();
+            };
+            UpdateMenuState();
         }
 
-        void AddMenu<T>(SymbolRegular icon) where T : System.Windows.Controls.Page
+        NavigationViewItem AddMenu<T>(SymbolRegular icon) where T : System.Windows.Controls.Page
         {
-            MenuItems.Add(new NavigationViewItem
+            var item = new NavigationViewItem
             {
-                Content = nameof(T),
+                Content = typeof(T).Name,
                 Icon = new SymbolIcon { Symbol = icon },
                 TargetPageType = typeof(T)
-            });
+            };
+            MenuItems.Add(item);
+            return item;
+        }
+
+        void UpdateMenuState()
+        {
+            var loggedIn = !string.IsNullOrEmpty(Session.CurrentUserId);
+            _dashboardMenuItem.IsEnabled = !loggedIn;
+            _homeMenuItem.IsEnabled = loggedIn;
         }
 
         [RelayCommand]
