@@ -10,6 +10,8 @@ namespace Database
 {
     public class SQLite : Abstract.DBbase
     {
+        readonly PasswordHasher _hasher = new();
+
         public SQLite(IOptionsMonitor<DbSettings> option, ILogger<SQLite> logger) :
             base(new SqliteConnection($"Data Source={option.CurrentValue.Path}"), logger)
         { }
@@ -35,7 +37,7 @@ namespace Database
 
         public Task<int> InsertUser(string id, string password) =>
             NonQueryAsync("INSERT INTO Users (Id, Password) VALUES (@Id, @Password)",
-                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = PasswordHasher.Hash(password) });
+                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = _hasher.Hash(password) });
 
         public async Task<bool> ValidateUser(string id, string password)
         {
@@ -46,7 +48,7 @@ namespace Database
                 return false;
 
             var storedHash = (string)rows[0][0];
-            return PasswordHasher.Verify(password, storedHash);
+            return _hasher.Verify(password, storedHash);
         }
     }
 }
