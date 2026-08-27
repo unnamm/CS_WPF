@@ -1,6 +1,6 @@
 using Configuration;
+using Log;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.ObjectModel;
 using View.Settings;
 using Wpf.Ui.Controls;
@@ -9,11 +9,14 @@ namespace View
 {
     public class MainWindowViewModel
     {
-        public ObservableCollection<object> MenuItems { get; set; } = [];
-        public ObservableCollection<object> FooterMenuItems { get; set; } = [];
+        public ObservableCollection<object> MenuItems { get; } = [];
+        public ObservableCollection<object> FooterMenuItems { get; } = [];
+        public ObservableCollection<LogEntry> Logs { get; } = [];
 
-        public MainWindowViewModel(ILogger<MainWindowViewModel> logger)
+        public MainWindowViewModel(ILogger<MainWindowViewModel> logger, ViewLoggerProvider viewLog)
         {
+            Logs = viewLog.Logs;
+
             using (logger.BeginScope("print test log"))
             {
                 foreach (var level in Enum.GetValues<LogLevel>())

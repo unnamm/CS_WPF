@@ -12,12 +12,5 @@
 
     <Grid>
         <TextBlock Text="Dashboard"/>
-        <ui:ListView ItemsSource="{Binding LogList}" Margin="0, 20">
-            <ui:ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" Foreground="{Binding Level, Converter={converter:ColorFromLevelConverter}}"/>
-                </DataTemplate>
-            </ui:ListView.ItemTemplate>
-        </ui:ListView>
     </Grid>
 </Page>

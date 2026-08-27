@@ -5,13 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:converter="clr-namespace:View.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
     <Grid>
-        <ui:NavigationView x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ui:NavigationView Grid.Row="0" x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
             <ui:NavigationView.Header>
                 <TextBlock Text="Main Header"/>
             </ui:NavigationView.Header>
         </ui:NavigationView>
+        <ui:ListView Grid.Row="1" ItemsSource="{Binding Logs}">
+            <ui:ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="{Binding Level, Converter={converter:ColorFromLevelConverter}}"/>
+                </DataTemplate>
+            </ui:ListView.ItemTemplate>
+        </ui:ListView>
     </Grid>
 </Window>
