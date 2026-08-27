@@ -13,9 +13,9 @@ using System.Windows.Shapes;
 
 namespace View
 {
-    public partial class Dashboard : Page
+    public partial class Login : Page
     {
-        public Dashboard(DashboardViewModel vm)
+        public Login(LoginViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

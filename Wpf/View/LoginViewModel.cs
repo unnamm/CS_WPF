@@ -10,7 +10,7 @@ using Wpf.Ui.Abstractions.Controls;
 namespace View
 {
     [INotifyPropertyChanged]
-    public partial class DashboardViewModel : NavigationAware
+    public partial class LoginViewModel : NavigationAware
     {
         readonly ILogger _logger;
         readonly SQLite _db;
@@ -24,7 +24,7 @@ namespace View
         [ObservableProperty] public partial string? SignUpPassword { get; set; }
         [ObservableProperty] public partial string? SignUpPasswordConfirm { get; set; }
 
-        public DashboardViewModel(ILogger<DashboardViewModel> logger, SQLite db, UserSession session, AppNavigator navigator)
+        public LoginViewModel(ILogger<LoginViewModel> logger, SQLite db, UserSession session, AppNavigator navigator)
         {
             _logger = logger;
             _db = db;

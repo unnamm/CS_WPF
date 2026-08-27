@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Configuration;
 using Log;
 using System.Collections.ObjectModel;
+using View.Container;
 using View.Model;
 using View.Rapper;
 using View.Settings;
@@ -13,22 +14,18 @@ namespace View
     public partial class MainWindowViewModel : ObservableObject
     {
         readonly AppNavigator _navigator;
-        readonly NavigationViewItem _dashboardMenuItem;
-        readonly NavigationViewItem _homeMenuItem;
+        public MenuContainer Menu { get; }
 
-        public ObservableCollection<object> MenuItems { get; } = [];
-        public ObservableCollection<object> FooterMenuItems { get; } = [];
+        public ObservableCollection<NavigationViewItem> FooterMenuItems { get; } = [];
         public ObservableCollection<LogEntry> Logs { get; } = [];
         public UserSession Session { get; }
 
-        public MainWindowViewModel(ViewLoggerProvider viewLog, UserSession session, AppNavigator navigator)
+        public MainWindowViewModel(ViewLoggerProvider viewLog, UserSession session, AppNavigator navigator, MenuContainer menuContainer)
         {
             Logs = viewLog.Logs;
             Session = session;
             _navigator = navigator;
-
-            _dashboardMenuItem = AddMenu<Dashboard>(SymbolRegular.Key16);
-            _homeMenuItem = AddMenu<HomePage>(SymbolRegular.Home16);
+            Menu = menuContainer;
 
             foreach (var configType in ConfigSectionRegistry.All)
             {
@@ -42,35 +39,16 @@ namespace View
 
             Session.PropertyChanged += (_, e) =>
             {
-                if (e.PropertyName == nameof(Session.CurrentUserId)) UpdateMenuState();
+                if (e.PropertyName == nameof(Session.CurrentUserId))
+                    Menu.UpdateMenuState(!string.IsNullOrEmpty(Session.CurrentUserId));
             };
-            UpdateMenuState();
-        }
-
-        NavigationViewItem AddMenu<T>(SymbolRegular icon) where T : System.Windows.Controls.Page
-        {
-            var item = new NavigationViewItem
-            {
-                Content = typeof(T).Name,
-                Icon = new SymbolIcon { Symbol = icon },
-                TargetPageType = typeof(T)
-            };
-            MenuItems.Add(item);
-            return item;
-        }
-
-        void UpdateMenuState()
-        {
-            var loggedIn = !string.IsNullOrEmpty(Session.CurrentUserId);
-            _dashboardMenuItem.IsEnabled = !loggedIn;
-            _homeMenuItem.IsEnabled = loggedIn;
         }
 
         [RelayCommand]
         void Logout()
         {
             Session.CurrentUserId = null;
-            _navigator.Navigate(typeof(Dashboard));
+            _navigator.Navigate(typeof(Login));
         }
     }
 }
