@@ -30,9 +30,15 @@ namespace View
 
             MenuItems.Add(new NavigationViewItem
             {
-                Content = "Dashboard",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Home16 },
+                Content = nameof(Dashboard),
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Key16 },
                 TargetPageType = typeof(Dashboard)
+            });
+            MenuItems.Add(new NavigationViewItem
+            {
+                Content = nameof(HomePage),
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Home16 },
+                TargetPageType = typeof(HomePage)
             });
 
             foreach (var configType in ConfigSectionRegistry.All)

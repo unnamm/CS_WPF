@@ -52,6 +52,7 @@ namespace Starter
                     .AddSingleton<View.Model.UserSession>()
                     .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
                     .AddSingleton<Dashboard>().AddSingleton<DashboardViewModel>()
+                    .AddSingleton<HomePage>().AddSingleton<HomePageViewModel>()
                     .AddSingleton<Database.SQLite>()
                     ;
 
