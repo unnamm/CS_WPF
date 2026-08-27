@@ -19,7 +19,7 @@ namespace Database.Abstract
 
         public bool IsConnected => _connect.State == ConnectionState.Open;
 
-        public Task ConnectAsync(CancellationToken token = default)
+        public virtual Task ConnectAsync(CancellationToken token = default)
         {
             if (string.IsNullOrWhiteSpace(_connect.DataSource))
                 throw new Exception("path is empty");
