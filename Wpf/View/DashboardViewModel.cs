@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Database;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using View.Model;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace View
@@ -12,6 +13,7 @@ namespace View
     {
         readonly ILogger _logger;
         readonly SQLite _db;
+        readonly UserSession _session;
         [ObservableProperty][NotifyPropertyChangedFor(nameof(IsLoginMode))] public partial bool IsSignUpMode { get; set; }
         public bool IsLoginMode => !IsSignUpMode;
         [ObservableProperty] public partial string? LoginId { get; set; }
@@ -20,10 +22,11 @@ namespace View
         [ObservableProperty] public partial string? SignUpPassword { get; set; }
         [ObservableProperty] public partial string? SignUpPasswordConfirm { get; set; }
 
-        public DashboardViewModel(ILogger<DashboardViewModel> logger, SQLite db)
+        public DashboardViewModel(ILogger<DashboardViewModel> logger, SQLite db, UserSession session)
         {
             _logger = logger;
             _db = db;
+            _session = session;
         }
 
         [RelayCommand] void GoToSignUp() => IsSignUpMode = true;
@@ -52,6 +55,7 @@ namespace View
                     return;
                 }
 
+                _session.CurrentUserId = LoginId;
                 _logger.LogInformation("login success: {id}", LoginId);
             }
             catch (Exception ex)

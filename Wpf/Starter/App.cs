@@ -49,6 +49,7 @@ namespace Starter
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<ViewLoggerProvider>())
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
                     .AddSingleton<LoadingWindow>()
+                    .AddSingleton<View.Model.UserSession>()
                     .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
                     .AddSingleton<Dashboard>().AddSingleton<DashboardViewModel>()
                     .AddSingleton<Database.SQLite>()

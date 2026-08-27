@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <ui:NavigationView Grid.Row="0" x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
             <ui:NavigationView.Header>
-                <TextBlock Text="Main Header"/>
+                <TextBlock Text="{Binding Session.CurrentUserId, StringFormat='welcome {0}', TargetNullValue=need login}"/>
             </ui:NavigationView.Header>
         </ui:NavigationView>
         <ui:ListView Grid.Row="1" ItemsSource="{Binding Logs}">

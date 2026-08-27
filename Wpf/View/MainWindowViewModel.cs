@@ -2,6 +2,7 @@ using Configuration;
 using Log;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using View.Model;
 using View.Settings;
 using Wpf.Ui.Controls;
 
@@ -12,10 +13,12 @@ namespace View
         public ObservableCollection<object> MenuItems { get; } = [];
         public ObservableCollection<object> FooterMenuItems { get; } = [];
         public ObservableCollection<LogEntry> Logs { get; } = [];
+        public UserSession Session { get; }
 
-        public MainWindowViewModel(ILogger<MainWindowViewModel> logger, ViewLoggerProvider viewLog)
+        public MainWindowViewModel(ILogger<MainWindowViewModel> logger, ViewLoggerProvider viewLog, UserSession session)
         {
             Logs = viewLog.Logs;
+            Session = session;
 
             using (logger.BeginScope("print test log"))
             {
