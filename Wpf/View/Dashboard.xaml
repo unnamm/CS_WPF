@@ -24,7 +24,7 @@
             <ui:TextBox Text="{Binding LoginId, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
 
             <TextBlock Text="PW" Margin="0,0,0,4"/>
-            <ui:PasswordBox Password="{Binding LoginPassword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,16"/>
+            <ui:PasswordBox Password="{Binding LoginPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,16"/>
 
             <ui:Button Content="Login" Command="{Binding LoginCommand}" HorizontalAlignment="Stretch" Appearance="Primary" Margin="0,0,0,8"/>
             <ui:Button Content="Sign Up" Command="{Binding GoToSignUpCommand}" HorizontalAlignment="Stretch"/>
@@ -41,10 +41,10 @@
             <ui:TextBox Text="{Binding SignUpId, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
 
             <TextBlock Text="PW" Margin="0,0,0,4"/>
-            <ui:PasswordBox Password="{Binding SignUpPassword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+            <ui:PasswordBox Password="{Binding SignUpPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
 
             <TextBlock Text="PW Confirm" Margin="0,0,0,4"/>
-            <ui:PasswordBox Password="{Binding SignUpPasswordConfirm, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,16"/>
+            <ui:PasswordBox Password="{Binding SignUpPasswordConfirm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,16"/>
 
             <ui:Button Content="Sign Up" Command="{Binding SignUpCommand}" HorizontalAlignment="Stretch" Appearance="Primary" Margin="0,0,0,8"/>
             <ui:Button Content="Back" Command="{Binding GoToLoginCommand}" HorizontalAlignment="Stretch"/>
