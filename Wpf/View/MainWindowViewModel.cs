@@ -1,6 +1,5 @@
 using Configuration;
 using Log;
-using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using View.Model;
 using View.Settings;
@@ -15,31 +14,13 @@ namespace View
         public ObservableCollection<LogEntry> Logs { get; } = [];
         public UserSession Session { get; }
 
-        public MainWindowViewModel(ILogger<MainWindowViewModel> logger, ViewLoggerProvider viewLog, UserSession session)
+        public MainWindowViewModel(ViewLoggerProvider viewLog, UserSession session)
         {
             Logs = viewLog.Logs;
             Session = session;
 
-            using (logger.BeginScope("print test log"))
-            {
-                foreach (var level in Enum.GetValues<LogLevel>())
-                {
-                    logger.Log(level, "log level: {level}", level);
-                }
-            }
-
-            MenuItems.Add(new NavigationViewItem
-            {
-                Content = nameof(Dashboard),
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Key16 },
-                TargetPageType = typeof(Dashboard)
-            });
-            MenuItems.Add(new NavigationViewItem
-            {
-                Content = nameof(HomePage),
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Home16 },
-                TargetPageType = typeof(HomePage)
-            });
+            AddMenu<Dashboard>(SymbolRegular.Key16);
+            AddMenu<HomePage>(SymbolRegular.Home16);
 
             foreach (var configType in ConfigSectionRegistry.All)
             {
@@ -50,6 +31,16 @@ namespace View
                     TargetPageType = typeof(SettingSectionPage<>).MakeGenericType(configType)
                 });
             }
+        }
+
+        void AddMenu<T>(SymbolRegular icon) where T : System.Windows.Controls.Page
+        {
+            MenuItems.Add(new NavigationViewItem
+            {
+                Content = nameof(T),
+                Icon = new SymbolIcon { Symbol = icon },
+                TargetPageType = typeof(T)
+            });
         }
     }
 }
