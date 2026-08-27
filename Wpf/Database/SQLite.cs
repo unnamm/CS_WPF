@@ -35,13 +35,18 @@ namespace Database
 
         public Task<int> InsertUser(string id, string password) =>
             NonQueryAsync("INSERT INTO Users (Id, Password) VALUES (@Id, @Password)",
-                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = password });
+                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = PasswordHasher.Hash(password) });
 
         public async Task<bool> ValidateUser(string id, string password)
         {
-            var existing = await ReaderAsync("SELECT Id FROM Users WHERE Id = @Id AND Password = @Password",
-                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = password });
-            return existing.Count > 0;
+            var rows = await ReaderAsync("SELECT Password FROM Users WHERE Id = @Id",
+                new Dictionary<string, object?> { ["@Id"] = id });
+
+            if (rows.Count == 0)
+                return false;
+
+            var storedHash = (string)rows[0][0];
+            return PasswordHasher.Verify(password, storedHash);
         }
     }
 }

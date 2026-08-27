@@ -45,9 +45,9 @@ namespace Database.Abstract
         /// <param name="query"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public Task<int> NonQueryAsync(string query, CancellationToken token = default) => NonQueryAsync(query, null, token);
+        protected Task<int> NonQueryAsync(string query, CancellationToken token = default) => NonQueryAsync(query, null, token);
 
-        public Task<int> NonQueryAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
+        protected Task<int> NonQueryAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
         {
             using var cmd = _connect.CreateCommand();
             cmd.CommandText = query;
@@ -55,15 +55,7 @@ namespace Database.Abstract
             return cmd.ExecuteNonQueryAsync(token);
         }
 
-        /// <summary>
-        /// read
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public Task<List<object[]>> ReaderAsync(string query, CancellationToken token = default) => ReaderAsync(query, null, token);
-
-        public async Task<List<object[]>> ReaderAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
+        protected async Task<List<object[]>> ReaderAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
         {
             using var cmd = _connect.CreateCommand();
             cmd.CommandText = query;
