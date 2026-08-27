@@ -1,16 +1,55 @@
-﻿<Page x:Class="View.Dashboard"
+<Page x:Class="View.Dashboard"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:View"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:converter="clr-namespace:View.Converter"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Dashboard">
 
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Page.Resources>
+
     <Grid>
-        <TextBlock Text="Dashboard"/>
+        <!-- login -->
+        <StackPanel Width="280" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Visibility="{Binding IsLoginMode, Converter={StaticResource BoolToVis}}">
+            <TextBlock Text="Login" FontSize="20" FontWeight="Bold" Margin="0,0,0,16" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="ID" Margin="0,0,0,4"/>
+            <ui:TextBox Text="{Binding LoginId, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+
+            <TextBlock Text="PW" Margin="0,0,0,4"/>
+            <ui:PasswordBox Password="{Binding LoginPassword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,16"/>
+
+            <ui:Button Content="Login" Command="{Binding LoginCommand}" HorizontalAlignment="Stretch" Appearance="Primary" Margin="0,0,0,8"/>
+            <ui:Button Content="Sign Up" Command="{Binding GoToSignUpCommand}" HorizontalAlignment="Stretch"/>
+
+            <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,12,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Sign Up -->
+        <StackPanel Width="280" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Visibility="{Binding IsSignUpMode, Converter={StaticResource BoolToVis}}">
+            <TextBlock Text="Sign Up" FontSize="20" FontWeight="Bold" Margin="0,0,0,16" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="ID" Margin="0,0,0,4"/>
+            <ui:TextBox Text="{Binding SignUpId, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+
+            <TextBlock Text="PW" Margin="0,0,0,4"/>
+            <ui:PasswordBox Password="{Binding SignUpPassword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+
+            <TextBlock Text="PW Confirm" Margin="0,0,0,4"/>
+            <ui:PasswordBox Password="{Binding SignUpPasswordConfirm, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,16"/>
+
+            <ui:Button Content="Sign Up" Command="{Binding SignUpCommand}" HorizontalAlignment="Stretch" Appearance="Primary" Margin="0,0,0,8"/>
+            <ui:Button Content="Back" Command="{Binding GoToLoginCommand}" HorizontalAlignment="Stretch"/>
+
+            <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,12,0,0" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Page>
