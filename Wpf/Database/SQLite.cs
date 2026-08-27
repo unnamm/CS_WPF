@@ -25,5 +25,16 @@ namespace Database
             var query = "CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY, Password TEXT NOT NULL)";
             return NonQueryAsync(query, token);
         }
+
+        public async Task<bool> IsUserExist(string id)
+        {
+            var existing = await ReaderAsync("SELECT Id FROM Users WHERE Id = @Id",
+                new Dictionary<string, object?> { ["@Id"] = id });
+            return existing.Count > 0;
+        }
+
+        public Task<int> InsertUser(string id, string password) =>
+            NonQueryAsync("INSERT INTO Users (Id, Password) VALUES (@Id, @Password)",
+                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = password });
     }
 }

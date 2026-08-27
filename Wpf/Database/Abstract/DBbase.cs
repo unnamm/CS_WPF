@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Database.Abstract
 {
-    public abstract class DBbase : IDatabase, IDisposable
+    public abstract class DBbase : IDisposable
     {
         readonly DbConnection _connect;
         readonly ILogger _logger;
@@ -45,10 +45,13 @@ namespace Database.Abstract
         /// <param name="query"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public Task<int> NonQueryAsync(string query, CancellationToken token = default)
+        public Task<int> NonQueryAsync(string query, CancellationToken token = default) => NonQueryAsync(query, null, token);
+
+        public Task<int> NonQueryAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
         {
             using var cmd = _connect.CreateCommand();
             cmd.CommandText = query;
+            AddParameters(cmd, parameters);
             return cmd.ExecuteNonQueryAsync(token);
         }
 
@@ -58,10 +61,13 @@ namespace Database.Abstract
         /// <param name="query"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public async Task<List<object[]>> ReaderAsync(string query, CancellationToken token = default)
+        public Task<List<object[]>> ReaderAsync(string query, CancellationToken token = default) => ReaderAsync(query, null, token);
+
+        public async Task<List<object[]>> ReaderAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
         {
             using var cmd = _connect.CreateCommand();
             cmd.CommandText = query;
+            AddParameters(cmd, parameters);
 
             var list = new List<object[]>();
             using var reader = await cmd.ExecuteReaderAsync(token);
@@ -75,6 +81,20 @@ namespace Database.Abstract
                 list.Add(rows);
             }
             return list;
+        }
+
+        static void AddParameters(DbCommand cmd, IReadOnlyDictionary<string, object?>? parameters)
+        {
+            if (parameters is null)
+                return;
+
+            foreach (var (name, value) in parameters)
+            {
+                var parameter = cmd.CreateParameter();
+                parameter.ParameterName = name;
+                parameter.Value = value ?? DBNull.Value;
+                cmd.Parameters.Add(parameter);
+            }
         }
     }
 }

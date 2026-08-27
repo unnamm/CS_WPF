@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Database;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace View
@@ -9,6 +11,7 @@ namespace View
     public partial class DashboardViewModel : NavigationAware
     {
         readonly ILogger _logger;
+        readonly SQLite _db;
         [ObservableProperty][NotifyPropertyChangedFor(nameof(IsLoginMode))] public partial bool IsSignUpMode { get; set; }
         public bool IsLoginMode => !IsSignUpMode;
         [ObservableProperty] public partial string? LoginId { get; set; }
@@ -17,66 +20,81 @@ namespace View
         [ObservableProperty] public partial string? SignUpPassword { get; set; }
         [ObservableProperty] public partial string? SignUpPasswordConfirm { get; set; }
 
-        public DashboardViewModel(ILogger<DashboardViewModel> logger)
+        public DashboardViewModel(ILogger<DashboardViewModel> logger, SQLite db)
         {
             _logger = logger;
+            _db = db;
         }
 
-        [RelayCommand]
-        void GoToSignUp()
-        {
-            IsSignUpMode = true;
-        }
-
-        [RelayCommand]
-        void GoToLogin()
-        {
-            IsSignUpMode = false;
-        }
+        [RelayCommand] void GoToSignUp() => IsSignUpMode = true;
+        [RelayCommand] void GoToLogin() => IsSignUpMode = false;
 
         [RelayCommand]
         void Login()
         {
-            if (string.IsNullOrWhiteSpace(LoginId))
+            try
             {
-                _logger.LogWarning("ID is empty");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(LoginPassword))
-            {
-                _logger.LogWarning("Password id empty");
-                return;
-            }
+                if (string.IsNullOrWhiteSpace(LoginId))
+                {
+                    _logger.LogWarning("ID is empty");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(LoginPassword))
+                {
+                    _logger.LogWarning("Password id empty");
+                    return;
+                }
 
-            _logger.LogInformation("login attempt: {id}", LoginId);
+                _logger.LogInformation("login attempt: {id}", LoginId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Login Error: {m}", ex.Message);
+            }
         }
 
         [RelayCommand]
-        void SignUp()
+        async Task SignUp()
         {
-            if (string.IsNullOrWhiteSpace(SignUpId))
+            try
             {
-                _logger.LogWarning("ID is empty");
-                return;
+                if (string.IsNullOrWhiteSpace(SignUpId))
+                {
+                    _logger.LogWarning("ID is empty");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(SignUpPassword))
+                {
+                    _logger.LogWarning("Password id empty");
+                    return;
+                }
+
+                if (SignUpPassword != SignUpPasswordConfirm)
+                {
+                    _logger.LogWarning("password is not confirm");
+                    return;
+                }
+
+                var existing = await _db.IsUserExist(SignUpId);
+                if (existing)
+                {
+                    _logger.LogWarning("id already exists: {id}", SignUpId);
+                    return;
+                }
+
+                await _db.InsertUser(SignUpId, SignUpPassword);
+
+                _logger.LogInformation("sign up: {id}", SignUpId);
+
+                SignUpId = null;
+                SignUpPassword = null;
+                SignUpPasswordConfirm = null;
+                IsSignUpMode = false;
             }
-            if (string.IsNullOrWhiteSpace(SignUpPassword))
+            catch (Exception ex)
             {
-                _logger.LogWarning("Password id empty");
-                return;
+                _logger.LogError("SignUp Error: {m}", ex.Message);
             }
-
-            if (SignUpPassword != SignUpPasswordConfirm)
-            {
-                _logger.LogWarning("password is not confirm");
-                return;
-            }
-
-            _logger.LogInformation("sign up: {id}", SignUpId);
-
-            SignUpId = null;
-            SignUpPassword = null;
-            SignUpPasswordConfirm = null;
-            IsSignUpMode = false;
         }
 
         public override void OnNavigatedTo()
