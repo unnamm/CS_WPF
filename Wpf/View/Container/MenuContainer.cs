@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Configuration;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Text;
 using System.Windows.Controls;
+using View.Settings;
 using Wpf.Ui.Controls;
 
 namespace View.Container
@@ -11,8 +12,22 @@ namespace View.Container
     public class MenuContainer
     {
         public ObservableCollection<NavigationViewItem> MenuItems { get; } = [];
+        public ObservableCollection<NavigationViewItem> FooterMenuItems { get; } = [];
         readonly List<NavigationViewItem> _menus = [];
         NavigationViewItem? _login;
+
+        public MenuContainer()
+        {
+            foreach (var configType in ConfigSectionRegistry.All)
+            {
+                FooterMenuItems.Add(new NavigationViewItem
+                {
+                    Content = configType.Name,
+                    Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+                    TargetPageType = typeof(SettingSectionPage<>).MakeGenericType(configType)
+                });
+            }
+        }
 
         public void AddMenu<T>(SymbolRegular icon, bool isLoginMenu = false) where T : Page
         {

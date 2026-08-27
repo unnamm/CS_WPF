@@ -13,7 +13,7 @@
             <RowDefinition Height="5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ui:NavigationView Grid.Row="0" x:Name="RootNavigation" MenuItemsSource="{Binding Menu.MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
+        <ui:NavigationView Grid.Row="0" x:Name="RootNavigation" MenuItemsSource="{Binding Menu.MenuItems}" FooterMenuItemsSource="{Binding Menu.FooterMenuItems}" IsPaneOpen="False">
             <ui:NavigationView.Header>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="{Binding Session.CurrentUserId, StringFormat='welcome {0}', TargetNullValue=need login}"/>
