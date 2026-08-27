@@ -48,11 +48,20 @@ namespace View.Container
 
         public void UpdateMenuState(bool isLogined)
         {
-            _login!.IsEnabled = !isLogined;
+            SetState(_login!, !isLogined);
             foreach (var item in _menus)
             {
-                item.IsEnabled = isLogined;
+                SetState(item, isLogined);
             }
+        }
+
+        static void SetState(NavigationViewItem item, bool enabled)
+        {
+            const double ActiveOpacity = 0.1;
+            const double DisabledOpacity = 0.4;
+
+            item.IsEnabled = enabled;
+            item.Opacity = enabled ? ActiveOpacity : DisabledOpacity;
         }
     }
 }
