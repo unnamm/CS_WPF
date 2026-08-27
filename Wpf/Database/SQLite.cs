@@ -36,5 +36,12 @@ namespace Database
         public Task<int> InsertUser(string id, string password) =>
             NonQueryAsync("INSERT INTO Users (Id, Password) VALUES (@Id, @Password)",
                 new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = password });
+
+        public async Task<bool> ValidateUser(string id, string password)
+        {
+            var existing = await ReaderAsync("SELECT Id FROM Users WHERE Id = @Id AND Password = @Password",
+                new Dictionary<string, object?> { ["@Id"] = id, ["@Password"] = password });
+            return existing.Count > 0;
+        }
     }
 }

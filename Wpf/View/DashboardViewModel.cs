@@ -30,7 +30,7 @@ namespace View
         [RelayCommand] void GoToLogin() => IsSignUpMode = false;
 
         [RelayCommand]
-        void Login()
+        async Task Login()
         {
             try
             {
@@ -45,7 +45,14 @@ namespace View
                     return;
                 }
 
-                _logger.LogInformation("login attempt: {id}", LoginId);
+                var valid = await _db.ValidateUser(LoginId, LoginPassword);
+                if (!valid)
+                {
+                    _logger.LogWarning("login failed: {id}", LoginId);
+                    return;
+                }
+
+                _logger.LogInformation("login success: {id}", LoginId);
             }
             catch (Exception ex)
             {
