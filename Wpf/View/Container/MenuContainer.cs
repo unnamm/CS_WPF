@@ -57,7 +57,7 @@ namespace View.Container
 
         static void SetState(NavigationViewItem item, bool enabled)
         {
-            const double ActiveOpacity = 0.1;
+            const double ActiveOpacity = 1;
             const double DisabledOpacity = 0.4;
 
             item.IsEnabled = enabled;
