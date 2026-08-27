@@ -15,7 +15,13 @@
         </Grid.RowDefinitions>
         <ui:NavigationView Grid.Row="0" x:Name="RootNavigation" MenuItemsSource="{Binding MenuItems}" FooterMenuItemsSource="{Binding FooterMenuItems}" IsPaneOpen="False">
             <ui:NavigationView.Header>
-                <TextBlock Text="{Binding Session.CurrentUserId, StringFormat='welcome {0}', TargetNullValue=need login}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Session.CurrentUserId, StringFormat='welcome {0}', TargetNullValue=need login}"/>
+                    <ui:Button Margin="12,0,0,0"
+                               Content="Logout"
+                               Command="{Binding LogoutCommand}"
+                               Visibility="{Binding Session.CurrentUserId, Converter={converter:NullToVisibilityConverter}}"/>
+                </StackPanel>
             </ui:NavigationView.Header>
         </ui:NavigationView>
         <ui:ListView Grid.Row="1" ItemsSource="{Binding Logs}">
