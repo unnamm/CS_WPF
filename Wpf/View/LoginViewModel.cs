@@ -61,7 +61,7 @@ namespace View
                 _session.CurrentUserId = LoginId;
                 _logger.LogInformation("login success: {id}", LoginId);
 
-                _navigator.Navigate(typeof(HomePage));
+                _navigator.Navigate<HomePage>();
             }
             catch (Exception ex)
             {

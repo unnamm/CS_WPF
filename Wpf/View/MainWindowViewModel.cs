@@ -1,7 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Log;
+using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 using View.Container;
 using View.Model;
 using View.Rapper;
@@ -15,6 +18,7 @@ namespace View
         public MenuContainer Menu { get; }
         public DeviceTracker Devices { get; }
         public UserSession Session { get; }
+        public string BuildDate { get; } = "App " + File.GetLastWriteTime(Assembly.GetEntryAssembly()!.Location).ToString("yyyy.MM.dd.HHmm");
 
         public MainWindowViewModel(ViewLoggerProvider viewLog, UserSession session, AppNavigator navigator, MenuContainer menuContainer, DeviceTracker deviceTracker)
         {
@@ -35,7 +39,7 @@ namespace View
         void Logout()
         {
             Session.CurrentUserId = null;
-            _navigator.Navigate(typeof(Login));
+            _navigator.Navigate<Login>();
         }
     }
 }

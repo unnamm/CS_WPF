@@ -7,6 +7,9 @@ namespace View.Rapper
         NavigationView? _navigationView;
 
         public void SetNavigationControl(NavigationView navigationView) => _navigationView = navigationView;
-        public void Navigate(Type pageType) => _navigationView!.Navigate(pageType);
+        public void Navigate<T>() where T : System.Windows.Controls.Page
+        {
+            _navigationView!.Navigate(typeof(T));
+        }
     }
 }

@@ -1,5 +1,3 @@
-using Configuration.Enums;
-
 namespace Configuration.Config
 {
     public class DbSettings : IConfigSection
