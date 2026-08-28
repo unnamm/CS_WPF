@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows;
 using View.Model;
 
 namespace View.Container
@@ -17,10 +18,13 @@ namespace View.Container
 
         public void Update()
         {
-            foreach (var item in DeviceStates)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                item.Update();
-            }
+                foreach (var item in DeviceStates)
+                {
+                    item.Update();
+                }
+            });
         }
     }
 }

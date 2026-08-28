@@ -13,14 +13,16 @@ namespace View
         readonly AppNavigator _navigator;
         public ObservableCollection<LogEntry> Logs { get; } = [];
         public MenuContainer Menu { get; }
+        public DeviceTracker Devices { get; }
         public UserSession Session { get; }
 
-        public MainWindowViewModel(ViewLoggerProvider viewLog, UserSession session, AppNavigator navigator, MenuContainer menuContainer)
+        public MainWindowViewModel(ViewLoggerProvider viewLog, UserSession session, AppNavigator navigator, MenuContainer menuContainer, DeviceTracker deviceTracker)
         {
             Logs = viewLog.Logs;
             Session = session;
             _navigator = navigator;
             Menu = menuContainer;
+            Devices = deviceTracker;
 
             Session.PropertyChanged += (_, e) =>
             {

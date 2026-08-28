@@ -18,6 +18,22 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="{Binding Session.CurrentUserId, StringFormat='welcome {0}', TargetNullValue=need login}"/>
                     <ui:Button Margin="12,0,0,0" Content="Logout" Command="{Binding LogoutCommand}" Visibility="{Binding Session.CurrentUserId, Converter={converter:NullToVisibilityConverter}}"/>
+                    <ItemsControl Margin="24,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding Devices.DeviceStates}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                                    <Ellipse Width="10" Height="10" VerticalAlignment="Center"
+                                             Fill="{Binding IsConnected, Converter={converter:BoolToBrushConverter}}"/>
+                                    <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </ui:NavigationView.Header>
         </ui:NavigationView>
