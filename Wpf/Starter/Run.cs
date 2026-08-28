@@ -20,19 +20,21 @@ namespace Starter
         readonly MainWindow _main;
         readonly LoadingWindow _loading;
         readonly SQLite _db;
+        readonly DeviceTracker _deviceTracker;
 
-        public Run(MainWindow main, LoadingWindow loading, ILogger<Run> logger, Log.ViewLoggerProvider viewLog, SQLite db, MenuContainer menuContainer)
+        public Run(MainWindow main, LoadingWindow loading, ILogger<Run> logger, Log.ViewLoggerProvider viewLog, SQLite db, MenuContainer mc, DeviceTracker dt)
         {
             _logger = logger;
             _main = main;
             _loading = loading;
             _db = db;
+            _deviceTracker = dt;
 
             viewLog.SetInvoker(Application.Current.Dispatcher.Invoke);
 
-            menuContainer.AddMenu<Login>(SymbolRegular.Key16, true);
-            menuContainer.AddMenu<HomePage>(SymbolRegular.Home16);
-            menuContainer.UpdateMenuState(false);
+            mc.AddMenu<Login>(SymbolRegular.Key16, true);
+            mc.AddMenu<HomePage>(SymbolRegular.Home16);
+            mc.UpdateMenuState(false);
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -54,9 +56,24 @@ namespace Starter
             await base.StartAsync(cancellationToken);
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            return Task.CompletedTask;
+            while (true)
+            {
+                try
+                {
+                    await Task.Delay(1000, stoppingToken);
+                    _deviceTracker.Update();
+                }
+                catch (TaskCanceledException)
+                {
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("error: {m}", ex.Message);
+                }
+            }
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)

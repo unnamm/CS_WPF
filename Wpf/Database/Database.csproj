@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\Device\Device.csproj" />
     <ProjectReference Include="..\Log\Log.csproj" />
   </ItemGroup>
 

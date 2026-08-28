@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Database.Abstract
 {
-    public abstract class DBbase : IDisposable
+    public abstract class DBbase : IDisposable, Device.IDevice
     {
         readonly DbConnection _connect;
         readonly ILogger _logger;

@@ -12,6 +12,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using View;
+using View.Container;
 using Wpf.Ui.Markup;
 
 namespace Starter
@@ -51,11 +52,12 @@ namespace Starter
                     .AddSingleton<LoadingWindow>()
                     .AddSingleton<View.Model.UserSession>()
                     .AddSingleton<View.Rapper.AppNavigator>()
-                    .AddSingleton<View.Container.MenuContainer>()
+                    .AddSingleton<MenuContainer>()
                     .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
                     .AddSingleton<Login>().AddSingleton<LoginViewModel>()
                     .AddSingleton<HomePage>().AddSingleton<HomePageViewModel>()
                     .AddSingleton<Database.SQLite>()
+                    .AddSingleton<DeviceTracker>()
                     ;
 
                 foreach (var configType in ConfigSectionRegistry.All)
