@@ -1,6 +1,5 @@
 {
   "DbSettings": {
-    "Path": "Database/sqlite.db",
-    "Level": "Two"
+    "Path": "Database/sqlite.db"
   }
 }

@@ -3,9 +3,6 @@ using System.Security.Cryptography;
 
 namespace Database
 {
-    /// <summary>
-    /// PBKDF2 기반 비밀번호 해시/검증. 저장 형식: {iterations}.{salt-base64}.{hash-base64}
-    /// </summary>
     public class PasswordHasher
     {
         readonly HashAlgorithmName _algorithm = HashAlgorithmName.SHA256;
