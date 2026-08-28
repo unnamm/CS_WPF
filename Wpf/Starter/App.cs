@@ -49,7 +49,6 @@ namespace Starter
                     .AddSingleton<FileLoggerProvider>()
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<ViewLoggerProvider>())
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
-                    .AddSingleton<LoadingWindow>()
                     .AddSingleton<View.Model.UserSession>()
                     .AddSingleton<View.Rapper.AppNavigator>()
                     .AddSingleton<MenuContainer>()

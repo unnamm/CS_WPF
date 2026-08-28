@@ -36,7 +36,6 @@ namespace Database.Abstract
             return _connect.OpenAsync(token);
         }
 
-        public Task CloseAsync() => _connect.CloseAsync();
         public void Dispose() => _connect.Dispose();
 
         /// <summary>

@@ -18,15 +18,13 @@ namespace Starter
     {
         readonly ILogger _logger;
         readonly MainWindow _main;
-        readonly LoadingWindow _loading;
         readonly SQLite _db;
         readonly DeviceTracker _deviceTracker;
 
-        public Run(MainWindow main, LoadingWindow loading, ILogger<Run> logger, Log.ViewLoggerProvider viewLog, SQLite db, MenuContainer mc, DeviceTracker dt)
+        public Run(MainWindow main, ILogger<Run> logger, Log.ViewLoggerProvider viewLog, SQLite db, MenuContainer mc, DeviceTracker dt)
         {
             _logger = logger;
             _main = main;
-            _loading = loading;
             _db = db;
             _deviceTracker = dt;
 
@@ -39,10 +37,11 @@ namespace Starter
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
+            var loadingWindow = new LoadingWindow();
             try
             {
-                _loading.Show();
-                _loading.SetStatus("connecting database...");
+                loadingWindow.Show();
+                loadingWindow.SetStatus("connecting database...");
                 await _db.ConnectAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -50,7 +49,8 @@ namespace Starter
                 _logger.LogError("StartAsync() {ex.Message}", ex.Message);
             }
 
-            _loading.Close();
+            loadingWindow.Close();
+            _main.Closing += OnMainClosing;
             _main.Show();
 
             await base.StartAsync(cancellationToken);
@@ -71,14 +71,34 @@ namespace Starter
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError("error: {m}", ex.Message);
+                    _logger.LogError("ExecuteAsync() error: {m}", ex.Message);
+                    await Task.Delay(5000, stoppingToken);
                 }
             }
         }
 
-        public override Task StopAsync(CancellationToken cancellationToken)
+        async void OnMainClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
-            return base.StopAsync(cancellationToken);
+            if (_main.Visibility != Visibility.Visible)
+            {
+                return;
+            }
+
+            try
+            {
+                e.Cancel = true;
+                _main.Hide();
+                var loadingWindow = new LoadingWindow();
+                loadingWindow.Show();
+                loadingWindow.SetStatus("disposing database...");
+                _db.Dispose();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("StopAsync() error: {m}", ex.Message);
+            }
+
+            Application.Current.Shutdown();
         }
     }
 }
