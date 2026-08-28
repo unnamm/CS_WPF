@@ -15,10 +15,9 @@ namespace View
 {
     public partial class HomePage : Page
     {
-        public HomePage(HomePageViewModel vm)
+        public HomePage()
         {
             InitializeComponent();
-            DataContext = vm;
         }
     }
 }

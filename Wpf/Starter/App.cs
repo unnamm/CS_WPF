@@ -53,11 +53,11 @@ namespace Starter
                     .AddSingleton<View.Model.UserSession>()
                     .AddSingleton<View.Rapper.AppNavigator>()
                     .AddSingleton<MenuContainer>()
-                    .AddSingleton<MainWindow>().AddSingleton<MainWindowViewModel>()
-                    .AddSingleton<Login>().AddSingleton<LoginViewModel>()
-                    .AddSingleton<HomePage>().AddSingleton<HomePageViewModel>()
                     .AddSingleton<Database.SQLite>()
                     .AddSingleton<DeviceTracker>()
+                    .AddSingletonViewModel<MainWindow, MainWindowViewModel>()
+                    .AddSingletonViewModel<Login, LoginViewModel>()
+                    .AddSingletonViewModel<HomePage, HomePageViewModel>()
                     ;
 
                 foreach (var configType in ConfigSectionRegistry.All)

@@ -16,10 +16,9 @@ namespace View
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(MainWindowViewModel vm, IServiceProvider serviceProvider, Rapper.AppNavigator navigator)
+        public MainWindow(IServiceProvider serviceProvider, Rapper.AppNavigator navigator)
         {
             InitializeComponent();
-            DataContext = vm;
             RootNavigation.SetServiceProvider(serviceProvider); //Navigation use serviceprovider
             navigator.SetNavigationControl(RootNavigation); // set navigation
         }

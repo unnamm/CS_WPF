@@ -15,10 +15,9 @@ namespace View
 {
     public partial class Login : Page
     {
-        public Login(LoginViewModel vm)
+        public Login()
         {
             InitializeComponent();
-            DataContext = vm;
         }
     }
 }
