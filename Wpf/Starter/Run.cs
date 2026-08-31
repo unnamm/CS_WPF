@@ -32,6 +32,7 @@ namespace Starter
 
             mc.AddMenu<Login>(SymbolRegular.Key16, true);
             mc.AddMenu<HomePage>(SymbolRegular.Home16);
+            mc.AddMenu<EmployeeManagePage>(SymbolRegular.PersonEdit24);
             mc.UpdateMenuState(false);
 
             _main.Closing += OnMainClosing;

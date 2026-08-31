@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Database
@@ -30,8 +31,7 @@ namespace Database
                 CREATE TABLE IF NOT EXISTS Roles (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Name TEXT NOT NULL UNIQUE,
-                    Level INTEGER NOT NULL
-                )
+                    Level INTEGER NOT NULL)
                 """;
             return NonQueryAsync(query, token);
         }
@@ -42,8 +42,7 @@ namespace Database
                 CREATE TABLE IF NOT EXISTS RolePermissions (
                     RoleId INTEGER NOT NULL REFERENCES Roles(Id),
                     PermissionCode TEXT NOT NULL,
-                    PRIMARY KEY (RoleId, PermissionCode)
-                )
+                    PRIMARY KEY (RoleId, PermissionCode))
                 """;
             return NonQueryAsync(query, token);
         }
@@ -78,5 +77,24 @@ namespace Database
             var storedHash = (string)rows[0][0];
             return _hasher.Verify(password, storedHash);
         }
+
+        public async Task<List<UserInfo>> GetUsers()
+        {
+            var rows = await ReaderAsync("SELECT Id, Rank, RoleId FROM Users", null);
+            return rows.Select(r => new UserInfo(
+                (string)r[0],
+                r[1] as string,
+                r[2] is long roleId ? (int)roleId : null)).ToList();
+        }
+
+        public async Task<List<RoleInfo>> GetRoles()
+        {
+            var rows = await ReaderAsync("SELECT Id, Name, Level FROM Roles ORDER BY Level", null);
+            return rows.Select(r => new RoleInfo((int)(long)r[0], (string)r[1], (int)(long)r[2])).ToList();
+        }
+
+        public Task<int> UpdateUserAsync(string id, string? rank, int? roleId) =>
+            NonQueryAsync("UPDATE Users SET Rank = @Rank, RoleId = @RoleId WHERE Id = @Id",
+                new Dictionary<string, object?> { ["@Id"] = id, ["@Rank"] = rank, ["@RoleId"] = roleId });
     }
 }
