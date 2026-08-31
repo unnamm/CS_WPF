@@ -33,16 +33,23 @@ namespace Starter
             mc.AddMenu<Login>(SymbolRegular.Key16, true);
             mc.AddMenu<HomePage>(SymbolRegular.Home16);
             mc.UpdateMenuState(false);
+
+            _main.Closing += OnMainClosing;
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
+            _main.IsEnabled = false;
+            _main.Show();
+
             var loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
             try
             {
-                loadingWindow.Show();
                 loadingWindow.SetStatus("connecting database...");
                 await _db.ConnectAsync(cancellationToken);
+
+                _main.IsEnabled = true;
             }
             catch (Exception ex)
             {
@@ -50,8 +57,6 @@ namespace Starter
             }
 
             loadingWindow.Close();
-            _main.Closing += OnMainClosing;
-            _main.Show();
 
             await base.StartAsync(cancellationToken);
         }
@@ -84,13 +89,14 @@ namespace Starter
                 return;
             }
 
+            e.Cancel = true;
+            _main.Hide();
+            var loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
+
             try
             {
-                e.Cancel = true;
-                _main.Hide();
-                var loadingWindow = new LoadingWindow();
-                loadingWindow.Show();
-                loadingWindow.SetStatus("disposing database...");
+                loadingWindow.SetStatus("closing database...");
                 _db.Dispose();
             }
             catch (Exception ex)

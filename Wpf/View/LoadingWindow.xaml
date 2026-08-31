@@ -9,9 +9,11 @@
         Topmost="True"
         ShowInTaskbar="False">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ui:ProgressRing IsIndeterminate="True" Width="48" Height="48" Margin="0,0,0,16"/>
-            <TextBlock x:Name="StatusText" Text="시작 중..." HorizontalAlignment="Center"/>
-        </StackPanel>
+        <Border BorderThickness="5" BorderBrush="Black">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ui:ProgressRing IsIndeterminate="True" Width="48" Height="48" Margin="0,0,0,16"/>
+                <TextBlock x:Name="StatusText" Text="시작 중..." HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
