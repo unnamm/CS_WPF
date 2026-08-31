@@ -19,7 +19,33 @@ namespace Database
         public override async Task ConnectAsync(CancellationToken token = default)
         {
             await base.ConnectAsync(token);
+            await MakeRoleTableAsync(token);
+            await MakeRolePermissionTableAsync(token);
             await MakeUserTableAsync(token);
+        }
+
+        Task<int> MakeRoleTableAsync(CancellationToken token)
+        {
+            var query = """
+                CREATE TABLE IF NOT EXISTS Roles (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT NOT NULL UNIQUE,
+                    Level INTEGER NOT NULL
+                )
+                """;
+            return NonQueryAsync(query, token);
+        }
+
+        Task<int> MakeRolePermissionTableAsync(CancellationToken token)
+        {
+            var query = """
+                CREATE TABLE IF NOT EXISTS RolePermissions (
+                    RoleId INTEGER NOT NULL REFERENCES Roles(Id),
+                    PermissionCode TEXT NOT NULL,
+                    PRIMARY KEY (RoleId, PermissionCode)
+                )
+                """;
+            return NonQueryAsync(query, token);
         }
 
         async Task MakeUserTableAsync(CancellationToken token)
