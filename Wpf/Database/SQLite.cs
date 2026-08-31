@@ -22,10 +22,12 @@ namespace Database
             await MakeUserTableAsync(token);
         }
 
-        Task<int> MakeUserTableAsync(CancellationToken token)
+        async Task MakeUserTableAsync(CancellationToken token)
         {
-            var query = "CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY, Password TEXT NOT NULL)";
-            return NonQueryAsync(query, token);
+            await NonQueryAsync("CREATE TABLE IF NOT EXISTS Users (Id TEXT PRIMARY KEY, Password TEXT NOT NULL)", token);
+
+            await EnsureColumnAsync("Users", "Rank", "TEXT", token);
+            await EnsureColumnAsync("Users", "RoleId", "INTEGER REFERENCES Roles(Id)", token);
         }
 
         public async Task<bool> IsUserExist(string id)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using System.Text;
 
 namespace Database.Abstract
@@ -52,6 +53,14 @@ namespace Database.Abstract
             cmd.CommandText = query;
             AddParameters(cmd, parameters);
             return cmd.ExecuteNonQueryAsync(token);
+        }
+
+        protected async Task EnsureColumnAsync(string table, string column, string definition, CancellationToken token = default)
+        {
+            var columns = await ReaderAsync($"PRAGMA table_info({table})", null, token);
+            var exists = columns.Any(row => string.Equals((string)row[1], column, StringComparison.OrdinalIgnoreCase));
+            if (!exists)
+                await NonQueryAsync($"ALTER TABLE {table} ADD COLUMN {column} {definition}", token);
         }
 
         protected async Task<List<object[]>> ReaderAsync(string query, IReadOnlyDictionary<string, object?>? parameters, CancellationToken token = default)
