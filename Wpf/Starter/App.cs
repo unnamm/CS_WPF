@@ -11,9 +11,9 @@ using System.Resources;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using View;
-using View.Container;
-using View.ViewModel;
+using UI;
+using UI.Container;
+using UI.ViewModel;
 using Wpf.Ui.Markup;
 
 namespace Starter
@@ -50,8 +50,8 @@ namespace Starter
                     .AddSingleton<FileLoggerProvider>()
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<ViewLoggerProvider>())
                     .AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<FileLoggerProvider>())
-                    .AddSingleton<View.Model.UserSession>()
-                    .AddSingleton<View.Rapper.AppNavigator>()
+                    .AddSingleton<UI.Model.UserSession>()
+                    .AddSingleton<UI.Rapper.AppNavigator>()
                     .AddSingleton<MenuContainer>()
                     .AddSingleton<Database.SQLite>()
                     .AddSingleton<DeviceTracker>()
@@ -63,7 +63,7 @@ namespace Starter
 
                 foreach (var configType in ConfigSectionRegistry.All)
                 {
-                    builder.Services.AddSingleton(typeof(View.Settings.SettingSectionPage<>).MakeGenericType(configType));
+                    builder.Services.AddSingleton(typeof(UI.Settings.SettingSectionPage<>).MakeGenericType(configType));
                 }
                 _host = builder.Build();
             }

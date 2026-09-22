@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
-using View;
-using View.Container;
+using UI;
+using UI.Container;
 using Wpf.Ui.Controls;
 
 namespace Starter
