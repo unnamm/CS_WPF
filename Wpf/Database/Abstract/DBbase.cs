@@ -55,6 +55,14 @@ namespace Database.Abstract
             return cmd.ExecuteNonQueryAsync(token);
         }
 
+        /// <summary>
+        /// add column in exist table
+        /// </summary>
+        /// <param name="table">target table</param>
+        /// <param name="column">add column name</param>
+        /// <param name="definition">data type</param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         protected async Task EnsureColumnAsync(string table, string column, string definition, CancellationToken token = default)
         {
             var columns = await ReaderAsync($"PRAGMA table_info({table})", null, token);

@@ -58,7 +58,6 @@ namespace Starter
                     .AddSingletonViewModel<MainWindow, MainWindowViewModel>()
                     .AddSingletonViewModel<Login, LoginViewModel>()
                     .AddSingletonViewModel<HomePage, HomePageViewModel>()
-                    .AddSingletonViewModel<EmployeeManagePage, EmployeeManagePageViewModel>()
                     ;
 
                 foreach (var configType in ConfigSectionRegistry.All)
