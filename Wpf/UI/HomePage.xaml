@@ -11,7 +11,7 @@
 
     <StackPanel Margin="20">
         <TextBlock Text="home" Margin="0,0,0,12"/>
-        <ui:Button Content="이미지 선택" Command="{Binding SelectImageCommand}" HorizontalAlignment="Left"/>
+        <ui:Button Content="Load Image" Command="{Binding SelectImageCommand}" HorizontalAlignment="Left"/>
         <Image Source="{Binding Image}" MaxWidth="400" MaxHeight="400" Margin="0,12,0,0"
                Stretch="Uniform" HorizontalAlignment="Left"/>
     </StackPanel>

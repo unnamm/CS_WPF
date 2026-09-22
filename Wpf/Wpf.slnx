@@ -5,4 +5,5 @@
   <Project Path="Log/Log.csproj" />
   <Project Path="Starter/Starter.csproj" />
   <Project Path="UI/UI.csproj" />
+  <Project Path="Vision/Vision.csproj" Id="4fa1eb0c-f659-4a24-ab36-799246569141" />
 </Solution>
