@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using View;
 using View.Container;
+using View.ViewModel;
 using Wpf.Ui.Markup;
 
 namespace Starter

@@ -9,7 +9,7 @@ using View.Container;
 using View.Model;
 using View.Rapper;
 
-namespace View
+namespace View.ViewModel
 {
     public partial class MainWindowViewModel : ObservableObject
     {

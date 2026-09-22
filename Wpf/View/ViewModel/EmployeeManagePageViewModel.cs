@@ -5,7 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Abstractions.Controls;
 
-namespace View
+namespace View.ViewModel
 {
     [INotifyPropertyChanged]
     public partial class EmployeeManagePageViewModel : NavigationAware

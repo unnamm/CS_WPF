@@ -7,7 +7,7 @@ using View.Model;
 using View.Rapper;
 using Wpf.Ui.Abstractions.Controls;
 
-namespace View
+namespace View.ViewModel
 {
     [INotifyPropertyChanged]
     public partial class LoginViewModel : NavigationAware
