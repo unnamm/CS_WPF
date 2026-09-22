@@ -30,8 +30,8 @@ namespace Starter
 
             viewLog.SetInvoker(Application.Current.Dispatcher.Invoke);
 
-            mc.AddMenu<Login>(SymbolRegular.Key16, true);
-            mc.AddMenu<HomePage>(SymbolRegular.Home16);
+            mc.AddMenu<HomePage>(SymbolRegular.Home16, true);
+            mc.AddMenu<Login>(SymbolRegular.Key16, false);
             mc.UpdateMenuState(false);
 
             _main.Closing += OnMainClosing;
