@@ -22,7 +22,7 @@ namespace UI.Settings
 
             Resources.MergedDictionaries.Add(new ResourceDictionary
             {
-                Source = new Uri("/View;component/Settings/SettingFieldTemplates.xaml", UriKind.Relative)
+                Source = new Uri("/UI;component/Settings/SettingFieldTemplates.xaml", UriKind.Relative)
             });
 
             var itemsControl = new ItemsControl

@@ -24,20 +24,35 @@ namespace UI.ViewModel
         [RelayCommand]
         async Task SelectImage()
         {
-            var dialog = new OpenFileDialog
+            using var a = _logger.BeginScope("SelectImage");
+            try
             {
-                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
-            };
+                var dialog = new OpenFileDialog
+                {
+                    Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
+                };
 
-            if (dialog.ShowDialog() != true)
-                return;
+                if (dialog.ShowDialog() != true)
+                    return;
 
-            Image = new BitmapImage(new Uri(dialog.FileName));
+                Image = new BitmapImage(new Uri(dialog.FileName));
 
-            var imageData = File.ReadAllBytes(dialog.FileName);
-            var stopwatch = Stopwatch.StartNew();
-            var result = await _ocr.GetOcrAsync(imageData);
-            _logger.LogInformation("\n line1: {line1}\n line2: {line2} \n tasktime: {time}", result.Lines[0].Text, result.Lines[1].Text, stopwatch);
+                var imageData = File.ReadAllBytes(dialog.FileName);
+                var stopwatch = Stopwatch.StartNew();
+                var result = await _ocr.GetOcrAsync(imageData);
+
+                var text = "";
+                foreach (var t in result.Lines)
+                {
+                    text += t.Text + " / ";
+                }
+
+                _logger.LogInformation("\n tasktime: {time}\n{lines}", stopwatch, text);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
     }
 }
