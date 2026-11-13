@@ -68,7 +68,6 @@ namespace Starter
                 try
                 {
                     await Task.Delay(1000, stoppingToken);
-                    _deviceTracker.Update();
                 }
                 catch (TaskCanceledException)
                 {
