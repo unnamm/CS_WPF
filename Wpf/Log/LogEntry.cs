@@ -35,7 +35,7 @@ namespace Log
                 _ => "    "
             };
 
-            var line = $"{Timestamp:HH:mm:ss} [{levelStr}] {Category}[{EventId}]: {Message}{(Scope != null ? $" => {Scope}" : "")}{Environment.NewLine}";
+            var line = $"{Timestamp:HH:mm:ss} [{levelStr}] {Category}[{EventId}]{(Scope != null ? $" => {Scope}" : "")}: {Message}{Environment.NewLine}";
             if (Exception != null)
                 line += Exception + Environment.NewLine;
 

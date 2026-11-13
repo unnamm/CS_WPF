@@ -39,7 +39,12 @@
         <ui:ListView Grid.Row="1" ItemsSource="{Binding Logs}">
             <ui:ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" Foreground="{Binding Level, Converter={converter:ColorFromLevelConverter}}"/>
+                    <TextBox Text="{Binding Mode=OneWay}"
+                             Foreground="{Binding Level, Converter={converter:ColorFromLevelConverter}}"
+                             IsReadOnly="True"
+                             BorderThickness="0"
+                             Padding="0"
+                             Background="Transparent"/>
                 </DataTemplate>
             </ui:ListView.ItemTemplate>
         </ui:ListView>

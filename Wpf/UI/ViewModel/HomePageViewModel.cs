@@ -5,13 +5,14 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace UI.ViewModel
 {
     public partial class HomePageViewModel : ObservableObject
     {
-        [ObservableProperty] public partial BitmapImage? Image { get; set; }
+        [ObservableProperty] public partial BitmapSource? Image { get; set; }
 
         readonly ILogger _logger;
         readonly Vision.Ocr _ocr = new(Vision.Ocr.KoKR);
@@ -35,24 +36,43 @@ namespace UI.ViewModel
                 if (dialog.ShowDialog() != true)
                     return;
 
-                Image = new BitmapImage(new Uri(dialog.FileName));
+                Image = LoadWithExifRotation(dialog.FileName);
 
                 var imageData = File.ReadAllBytes(dialog.FileName);
                 var stopwatch = Stopwatch.StartNew();
                 var result = await _ocr.GetOcrAsync(imageData);
-
-                var text = "";
-                foreach (var t in result.Lines)
-                {
-                    text += t.Text + " / ";
-                }
-
-                _logger.LogInformation("\n tasktime: {time}\n{lines}", stopwatch, text);
+                stopwatch.Stop();
+                _logger.LogInformation("\n tasktime: {time}\n{lines}", stopwatch, result.Text);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
+        }
+
+        static BitmapSource LoadWithExifRotation(string path)
+        {
+            using var stream = File.OpenRead(path);
+            var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+            var frame = decoder.Frames[0];
+
+            var angle = 0;
+            if (frame.Metadata is BitmapMetadata metadata &&
+                metadata.ContainsQuery("System.Photo.Orientation"))
+            {
+                var orientation = (ushort)(metadata.GetQuery("System.Photo.Orientation") ?? (ushort)1);
+                angle = orientation switch
+                {
+                    6 => 90,
+                    3 => 180,
+                    8 => 270,
+                    _ => 0
+                };
+            }
+
+            BitmapSource bitmap = angle == 0 ? frame : new TransformedBitmap(frame, new RotateTransform(angle));
+            bitmap.Freeze();
+            return bitmap;
         }
     }
 }
