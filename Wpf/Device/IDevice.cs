@@ -7,5 +7,6 @@ namespace Device
     public interface IDevice
     {
         public bool IsConnected { get; }
+        event Action? ConnectionChanged;
     }
 }

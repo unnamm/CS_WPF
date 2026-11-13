@@ -16,9 +16,11 @@ namespace Database.Abstract
         {
             _connect = connection;
             _logger = logger;
+            _connect.StateChange += (_, _) => ConnectionChanged?.Invoke();
         }
 
         public bool IsConnected => _connect.State == ConnectionState.Open;
+        public event Action? ConnectionChanged;
 
         public virtual Task ConnectAsync(CancellationToken token = default)
         {

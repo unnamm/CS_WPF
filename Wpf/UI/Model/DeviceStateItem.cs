@@ -8,17 +8,16 @@ namespace UI.Model
 {
     public partial class DeviceStateItem : ObservableObject
     {
-        [ObservableProperty] public partial bool IsConnected { get; set; }
         [ObservableProperty] public partial string? Name { get; set; }
+        public bool IsConnected => _device.IsConnected;
 
         readonly IDevice _device;
 
         public DeviceStateItem(IDevice device)
         {
-            _device = device;
             Name = device.GetType().Name;
+            _device = device;
+            _device.ConnectionChanged += () => this.OnPropertyChanged(nameof(IsConnected));
         }
-
-        public void Update() => IsConnected = _device.IsConnected;
     }
 }
