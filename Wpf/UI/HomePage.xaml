@@ -12,7 +12,8 @@
     <StackPanel Margin="20">
         <TextBlock Text="home" Margin="0,0,0,12"/>
         <ui:Button Content="Load Image" Command="{Binding SelectImageCommand}" HorizontalAlignment="Left"/>
-        <Image Source="{Binding Image}"
-               Stretch="Uniform" Margin="50"/>
+        <Border BorderThickness="1" BorderBrush="Black">
+            <Image Source="{Binding Image}" Stretch="Uniform" Margin="5"/>
+        </Border>
     </StackPanel>
 </Page>

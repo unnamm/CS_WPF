@@ -57,10 +57,9 @@ namespace UI.ViewModel
             var frame = decoder.Frames[0];
 
             var angle = 0;
-            if (frame.Metadata is BitmapMetadata metadata &&
-                metadata.ContainsQuery("System.Photo.Orientation"))
+            if (frame.Metadata is BitmapMetadata metadata && metadata.ContainsQuery("System.Photo.Orientation"))
             {
-                var orientation = (ushort)(metadata.GetQuery("System.Photo.Orientation") ?? (ushort)1);
+                var orientation = (ushort)(metadata.GetQuery("System.Photo.Orientation"));
                 angle = orientation switch
                 {
                     6 => 90,
